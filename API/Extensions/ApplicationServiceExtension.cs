@@ -1,4 +1,5 @@
 ﻿using API.Data;
+using API.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions;
@@ -14,6 +15,7 @@ public static class ApplicationServiceExtension
         {
             opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
         });
+        services.AddScoped<IUserRepository, UserRepository>();
         services.AddCors();
 
         return services;

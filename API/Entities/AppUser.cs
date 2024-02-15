@@ -8,7 +8,6 @@ namespace API.Entities;
 public class AppUser
 {
     // TODO remove unnecessary fields
-    // TODO add required tags to remove warning
     public int Id { get; set; }
 
     public required string Username { get; set; }

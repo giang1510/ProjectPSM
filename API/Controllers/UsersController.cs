@@ -1,5 +1,6 @@
 ﻿using API.Data;
 using API.Entities;
+using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,21 +9,20 @@ namespace API.Controllers;
 /// <summary>
 /// Handles api calls, that involve user data
 /// </summary>
-// TODO use repository instead of DataContext
 // TODO use DTO instead of entity 
 public class UsersController : BaseApiController
 {
-    private readonly DataContext _context;
+    private readonly IUserRepository _userRepository;
 
-    public UsersController(DataContext context)
+    public UsersController(IUserRepository userRepository)
     {
-        _context = context;
+        _userRepository = userRepository;
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
     {
-        var users = await _context.Users.ToListAsync();
+        var users = await _userRepository.GetUsersAsync();
 
         return Ok(users);
     }
@@ -30,8 +30,7 @@ public class UsersController : BaseApiController
     [HttpGet("{username}")]
     public async Task<ActionResult<AppUser>> GetUser(string username)
     {
-        var user = await _context.Users
-            .SingleOrDefaultAsync(x => x.Username == username);
+        var user = await _userRepository.GetUserByUsernameAsync(username);
         // TODO better way to handle user not found
         if (user == null)
         {
