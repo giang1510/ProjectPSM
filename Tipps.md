@@ -1,8 +1,13 @@
 # Solution to common problems
 
 - HTTPS certificate trust:
+
   - dotnet dev-certs https --trust
   - dotnet dev-certs https --clean (this first if above not working)
+
+- Downgrade/ Use other node version
+  - npm install -g n
+  - n 18.10.0
 
 # Tools to install
 
