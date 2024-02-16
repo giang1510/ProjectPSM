@@ -22,10 +22,9 @@ public class UserRepository : IUserRepository
         return await _context.Users.ToListAsync();
     }
 
-    // TODO Implement SaveAllAsync()
-    public Task<bool> SaveAllAsync()
+    public async Task<bool> SaveAllAsync()
     {
-        throw new NotImplementedException();
+        return await _context.SaveChangesAsync() > 0;
     }
 
     // TODO Implement Update(AppUser user)
