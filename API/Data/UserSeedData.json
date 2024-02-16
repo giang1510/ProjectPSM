@@ -1,0 +1,42 @@
+[
+    {
+      "Username": "Tommie",
+      "DateOfBirth": "1989-08-28",
+      "Gender": "female",
+      "Country": "Germany",
+      "PasswordHash": "",
+      "PasswordSalt": ""
+    },
+    {
+      "Username": "Allen",
+      "DateOfBirth": "1989-05-12",
+      "Gender": "male",
+      "Country": "Germany",
+      "PasswordHash": "",
+      "PasswordSalt": ""
+    },
+    {
+      "Username": "Cameron",
+      "DateOfBirth": "1989-12-10",
+      "Gender": "male",
+      "Country": "Vietnam",
+      "PasswordHash": "",
+      "PasswordSalt": ""
+    },
+    {
+      "Username": "Bullock",
+      "DateOfBirth": "1998-08-10",
+      "Gender": "male",
+      "Country": "Germany",
+      "PasswordHash": "",
+      "PasswordSalt": ""
+    },
+    {
+      "Username": "Claudia",
+      "DateOfBirth": "1988-03-15",
+      "Gender": "female",
+      "Country": "USA",
+      "PasswordHash": "",
+      "PasswordSalt": ""
+    }
+  ]

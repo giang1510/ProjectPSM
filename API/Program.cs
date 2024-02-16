@@ -1,3 +1,4 @@
+using API;
 using API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,5 +17,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+await app.MigrateSeedData();
 
 app.Run();
