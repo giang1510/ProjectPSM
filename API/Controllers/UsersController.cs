@@ -8,6 +8,7 @@ namespace API.Controllers;
 
 /// <summary>
 /// Handles api calls, that involve user data
+/// path: api/users
 /// </summary>
 // TODO use DTO instead of entity 
 public class UsersController : BaseApiController
