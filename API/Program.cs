@@ -14,6 +14,12 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
+app.UseCors(builder => builder
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials()
+    .WithOrigins("http://localhost:9200"));
+
 app.UseAuthorization();
 
 app.MapControllers();
