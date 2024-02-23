@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MembersService } from '../../services/members.service';
+import { Member } from 'src/app/model/member';
 
 
 @Component({
@@ -8,19 +9,19 @@ import { MembersService } from '../../services/members.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit{
-  users: any;
+  members: Member[] | undefined;
 
   constructor(private membersService: MembersService){}
   ngOnInit(): void {
-    this.getUsers();
+    this.getMembers();
   }
 
   // TODO this is just a test - Needs to be removed
-  getUsers(){
-    this.membersService.getUsers().subscribe({
-      next: users => {
-        this.users = users;
-        console.log(users);
+  getMembers(){
+    this.membersService.getMembers().subscribe({
+      next: members => {
+        this.members = members;
+        console.log(members);
       },
       error: error => console.log(error)
     });

@@ -10,7 +10,7 @@ export class MembersService {
   constructor(private http: HttpClient) { }
 
   // TODO this method should return a defined data type instead of any
-  getUsers(){
+  getMembers(){
     return this.http.get<any>(this.baseUrl + 'users');
   }
 }
