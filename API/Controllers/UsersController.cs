@@ -21,9 +21,9 @@ public class UsersController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
+    public async Task<ActionResult<IEnumerable<AppUser>>> GetMembers()
     {
-        var users = await _userRepository.GetUsersAsync();
+        var users = await _userRepository.GetMembersAsync();
 
         return Ok(users);
     }
