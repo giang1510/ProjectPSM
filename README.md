@@ -20,6 +20,10 @@ Social media service of products
 
 # Notes for developer
 
+- Bootstrap
+  - using ngx bootstrap (angular + bootstrap)
+- font awesome
+
 ## Mac
 
 - "chmod 755 filePath" to make file executable
