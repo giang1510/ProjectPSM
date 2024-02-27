@@ -22,7 +22,9 @@ Social media service of products
 
 - Bootstrap
   - using ngx bootstrap (angular + bootstrap)
-- font awesome
+- font awesome 6
+  - using angular-fontawesome 0.13 - error when generated via ng in standalone api project
+    -> no standalone API, only components
 
 ## Mac
 

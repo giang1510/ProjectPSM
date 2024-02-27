@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './core/components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     declarations: [AppComponent],
@@ -14,7 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         AppRoutingModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        HomeComponent
+        HomeComponent,
+        FontAwesomeModule
     ],
     providers: [],
     bootstrap: [AppComponent]

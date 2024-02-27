@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MembersService } from '../../services/members.service';
 import { Member } from 'src/app/model/member';
 import { NgFor } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -9,10 +11,12 @@ import { NgFor } from '@angular/common';
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
     standalone: true,
-    imports: [NgFor]
+    imports: [NgFor, FontAwesomeModule]
 })
 export class HomeComponent implements OnInit{
   members: Member[] | undefined;
+  // TODO remove test icon
+  faCoffee = faCoffee;
 
   constructor(private membersService: MembersService){}
   ngOnInit(): void {
