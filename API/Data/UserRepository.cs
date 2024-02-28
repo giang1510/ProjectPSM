@@ -44,4 +44,9 @@ public class UserRepository : IUserRepository
     {
         throw new NotImplementedException();
     }
+
+    public async Task<bool> UserExists(string username)
+    {
+        return await _context.Users.AnyAsync(user => user.Username.Equals(username.ToLower()));
+    }
 }
