@@ -25,6 +25,10 @@ Social media service of products
 - font awesome 6
   - using angular-fontawesome 0.13 - error when generated via ng in standalone api project
     -> no standalone API, only components
+- HTTPS for web client localhost (no versioning allowed)
+  - create ssl folder
+  - mkcert -install
+  - mkcert localhost
 
 ## Mac
 
