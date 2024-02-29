@@ -1,5 +1,6 @@
 ﻿using API.Data;
 using API.Interfaces;
+using API.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions;
@@ -9,13 +10,15 @@ namespace API.Extensions;
 /// </summary>
 public static class ApplicationServiceExtension
 {
+    private const string ConfigDBDefaultConnection = "DefaultConnection"; // TODO add to a constants class
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
     {
         services.AddDbContext<DataContext>(opt =>
         {
-            opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
+            opt.UseSqlite(config.GetConnectionString(ConfigDBDefaultConnection));
         });
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ITokenService, TokenService>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         services.AddCors();
 

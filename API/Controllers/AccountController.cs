@@ -12,11 +12,13 @@ public class AccountController : BaseApiController
 {
     private readonly DataContext _context;
     private readonly IUserRepository _userRepository;
+    private readonly ITokenService _tokenService;
 
-    public AccountController(DataContext context, IUserRepository userRepository)
+    public AccountController(DataContext context, IUserRepository userRepository, ITokenService tokenService)
     {
         _context = context;
         _userRepository = userRepository;
+        _tokenService = tokenService;
     }
 
     [HttpPost("register")] // api/account/register
@@ -37,7 +39,7 @@ public class AccountController : BaseApiController
         return new UserDto
         {
             Username = user.Username,
-            Token = "Token needed" // TODO add Tokenservice
+            Token = _tokenService.CreateToken(user)
         };
     }
 
