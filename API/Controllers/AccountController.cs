@@ -24,6 +24,7 @@ public class AccountController : BaseApiController
     [HttpPost("register")] // api/account/register
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
+        // TODO better way to handle bad request
         if (await _userRepository.UserExists(registerDto.Username)) return BadRequest("Username is taken.");
 
         // TODO Use UserManager
@@ -43,4 +44,27 @@ public class AccountController : BaseApiController
         };
     }
 
+    [HttpPost("login")] // api/account/login
+    public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+    {
+        var user = await _userRepository.GetUserByUsernameAsync(loginDto.Username);
+
+        // TODO better way to handle Unauthorized
+        if (user == null) return Unauthorized("Invalid username!");
+
+        using var hmac = new HMACSHA512(user.PasswordSalt);
+        var passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
+
+        for (int i = 0; i < passwordHash.Length; i++)
+        {
+            // TODO better way to handle Unauthorized
+            if (passwordHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password!");
+        }
+
+        return new UserDto
+        {
+            Username = user.Username,
+            Token = _tokenService.CreateToken(user)
+        };
+    }
 }
