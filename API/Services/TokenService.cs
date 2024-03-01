@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using API.Constants;
 using API.Entities;
 using Microsoft.IdentityModel.Tokens;
 
@@ -12,11 +13,10 @@ namespace API.Services;
 public class TokenService : ITokenService
 {
     private readonly SymmetricSecurityKey? _key;
-    private const string ConfigTokenKey = "TokenKey"; // TODO add to a constants class
 
     public TokenService(IConfiguration config)
     {
-        var tokenKey = config[ConfigTokenKey];
+        var tokenKey = config[ConfigurationKeys.TokenKey];
         if (tokenKey != null) _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
     }
 
