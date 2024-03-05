@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MembersService } from '../../services/members.service';
-import { Member } from 'src/app/model/member';
+import { Member } from 'src/app/core/models/member';
 import { NgFor } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit{
 
   constructor(private membersService: MembersService){}
   ngOnInit(): void {
-    this.getMembers();
+    // this.getMembers();
   }
 
   // TODO this is just a test - Needs to be removed
