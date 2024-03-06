@@ -30,7 +30,7 @@ export class NavComponent {
   login(): void{
     this.accountService.login(this.loginUser).subscribe({
       next: _ => {
-        
+        console.log('Login finished');
       },
       error: error => console.log(error)
     })

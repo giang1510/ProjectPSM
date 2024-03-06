@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit{
 
   constructor(private membersService: MembersService){}
   ngOnInit(): void {
-    // this.getMembers();
+    this.getMembers();
   }
 
   // TODO this is just a test - Needs to be removed
