@@ -33,6 +33,14 @@ export class AccountService {
     );
   }
 
+  /**
+   * Remove user data from storage
+   */
+  logout(){
+    localStorage.removeItem(AccountService.USER_LOCAL_STORAGE_KEY);
+    this.currentUserSource.next(null);
+  }
+
   setCurrentUser(user: User){
     localStorage.setItem(AccountService.USER_LOCAL_STORAGE_KEY, JSON.stringify(user));
     this.currentUserSource.next(user);

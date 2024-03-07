@@ -26,7 +26,7 @@ export class NavComponent {
 
   constructor(public accountService: AccountService){}
 
-  // TODO implement this
+  // TODO implement this, redirect to last page
   login(): void{
     this.accountService.login(this.loginUser).subscribe({
       next: _ => {
@@ -36,8 +36,11 @@ export class NavComponent {
     })
   }
 
-  // TODO Implement this
+  /**
+   * Execute logout via service
+   */
+  // TODO redirect to home page
   logout(){
-
+    this.accountService.logout();
   }
 }
