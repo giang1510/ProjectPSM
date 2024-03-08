@@ -6,12 +6,23 @@
 /* Importing Datepicker SCSS file. */
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 
-// TODO Setup colors
 // Your variable overrides go here, e.g.:
 $h1-font-size: 3rem;
 $primary: #1D63DC;
 
-
 @import "node_modules/bootswatch/dist/spacelab/variables";
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/bootswatch/dist/spacelab/bootswatch";
+
+
+// Custom setup with existing variables
+// TODO Setup colors
+fa-icon{
+    color: $white;
+}
+.btn-outline-primary {
+    --bs-btn-color: white;
+    &:hover{
+        border-color: white;
+    }
+}
