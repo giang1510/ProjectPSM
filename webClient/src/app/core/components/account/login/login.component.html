@@ -1,0 +1,23 @@
+<form
+  class="container col-md-4"
+  [formGroup]="loginForm"
+  (ngSubmit)="login()"
+  autocomplete="off"
+>
+  <h2 class="text-center text-primary">Log in to PSM</h2>
+  <hr />
+  <app-text-input
+    [formControl]="$any(loginForm.controls['username'])"
+    [label]="'Username'"
+  >
+  </app-text-input>
+  <app-text-input
+    [formControl]="$any(loginForm.controls['username'])"
+    [label]="'Password'"
+    [type]="'password'"
+  >
+  </app-text-input>
+  <div class="text-center">
+    <button class="btn btn-success" type="submit">Log in</button>
+  </div>
+</form>
