@@ -36,5 +36,31 @@ public static class Seed
         await context.SaveChangesAsync();
     }
 
+    public static async Task SeedProducts(DataContext context)
+    {
+        if (await context.Products.AnyAsync()) return;
 
+        var productData = await File.ReadAllTextAsync("Data/ProductSeedData.json");
+        var productPhotoData = await File.ReadAllTextAsync("Data/ProductPhotoSeedData.json");
+
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true,
+        };
+
+        var products = JsonSerializer.Deserialize<List<Product>>(productData, options);
+        var photos = JsonSerializer.Deserialize<List<PhotoDto>>(productPhotoData, options);
+        if (products == null || photos == null) return;
+        for (int i = 0; i < products.Count; i++)
+        {
+            products[i].Photos.Add(new ProductPhoto
+            {
+                Url = photos[i].Url,
+                Product = products[i]
+            });
+            context.Products.Add(products[i]);
+        }
+
+        await context.SaveChangesAsync();
+    }
 }

@@ -34,6 +34,7 @@ public static class ApplicationServiceExtension
             var context = services.GetRequiredService<DataContext>();
             await context.Database.MigrateAsync();
             await Seed.SeedUsers(context);
+            await Seed.SeedProducts(context);
         }
         catch (Exception ex)
         {
