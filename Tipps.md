@@ -14,3 +14,10 @@
 - dotnet-ef(cli tool):
   - dotnet tool install --global dotnet-ef --version 7.0.15
   - dotnet tool update --global dotnet-ef --version 7.0.15
+
+# Data migration
+
+- Create migration files:
+  - dotnet ef migrations add fileName -o Data/Migrations
+- Update database to new schemas
+  - dotnet ef database update
