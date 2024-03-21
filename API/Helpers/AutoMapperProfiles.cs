@@ -9,5 +9,7 @@ public class AutoMapperProfiles : Profile
     public AutoMapperProfiles()
     {
         CreateMap<AppUser, MemberDto>();
+        CreateMap<Product, ProductCardDto>();
+        CreateMap<ProductPhoto, PhotoDto>();
     }
 }
