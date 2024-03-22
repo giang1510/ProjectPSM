@@ -1,0 +1,22 @@
+<div class="card mb-4" *ngIf="productCard">
+  <div class="card-img-wrapper">
+    <img
+      class="card-img-top"
+      width="400"
+      height="250"
+      src="{{ productCard.photos[0].url }}"
+      alt="{{ productCard.name }}"
+    />
+  </div>
+  <div class="card-body p-1">
+    <h6 class="card-title text-center mb-1">
+      <a href="">{{ productCard.name }}</a>
+    </h6>
+    <p class="card-text text-muted text-center">
+      {{ productCard.manufacturer }}
+    </p>
+    <p class="card-text">
+      {{ productCard.price < 0 ? "No price" : productCard.price }}
+    </p>
+  </div>
+</div>
