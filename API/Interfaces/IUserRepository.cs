@@ -13,8 +13,15 @@ public interface IUserRepository
     Task<IEnumerable<AppUser>> GetUsersAsync();
     Task<IEnumerable<MemberDto>> GetMembersAsync();
     Task<AppUser?> GetUserByUsernameAsync(string username);
-    Task<bool> UserExists(string username);
+    Task<UserExistsState> UserExists(string username, string emailAddress);
     // TODO Add methods for DTO
     // Task<IEnumerable<MemberDto>> GetMembersAsync();
     // Task<MemberDto> GetMemberAsync(string username);
+}
+
+public enum UserExistsState
+{
+    No,
+    UsernameExists,
+    EmailAddressExists
 }

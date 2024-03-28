@@ -5,7 +5,8 @@
       "Gender": "female",
       "Country": "Germany",
       "PasswordHash": "",
-      "PasswordSalt": ""
+      "PasswordSalt": "",
+      "EmailAddress": "tommie@test.com"
     },
     {
       "Username": "Allen",
@@ -13,7 +14,8 @@
       "Gender": "male",
       "Country": "Germany",
       "PasswordHash": "",
-      "PasswordSalt": ""
+      "PasswordSalt": "",
+      "EmailAddress": "allen@test.com"
     },
     {
       "Username": "Cameron",
@@ -21,7 +23,8 @@
       "Gender": "male",
       "Country": "Vietnam",
       "PasswordHash": "",
-      "PasswordSalt": ""
+      "PasswordSalt": "",
+      "EmailAddress": "cameron@test.com"
     },
     {
       "Username": "Bullock",
@@ -29,7 +32,8 @@
       "Gender": "male",
       "Country": "Germany",
       "PasswordHash": "",
-      "PasswordSalt": ""
+      "PasswordSalt": "",
+      "EmailAddress": "bullock@test.com"
     },
     {
       "Username": "Claudia",
@@ -37,6 +41,7 @@
       "Gender": "female",
       "Country": "USA",
       "PasswordHash": "",
-      "PasswordSalt": ""
+      "PasswordSalt": "",
+      "EmailAddress": "claudia@test.com"
     }
   ]

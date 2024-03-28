@@ -25,15 +25,19 @@ public class AccountController : BaseApiController
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
         // TODO better way to handle bad request
-        if (await _userRepository.UserExists(registerDto.Username)) return BadRequest("Username is taken.");
+        var userExistsState = await _userRepository.UserExists(registerDto.Username, registerDto.EmailAddress);
+        if (userExistsState == UserExistsState.UsernameExists) return BadRequest("Username is taken.");
+        if (userExistsState == UserExistsState.EmailAddressExists) return BadRequest("Email address is taken.");
 
-        // TODO Use UserManager
+        // TODO Use UserManager (better mapping)
         using var hmac = new HMACSHA512();
         var user = new AppUser
         {
             Username = registerDto.Username.ToLower(),
             PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-            PasswordSalt = hmac.Key
+            PasswordSalt = hmac.Key,
+            EmailAddress = registerDto.EmailAddress,
+            DateOfBirth = registerDto.DateOfBirth
         };
         _context.Users.Add(user);
         await _context.SaveChangesAsync();

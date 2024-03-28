@@ -45,8 +45,22 @@ public class UserRepository : IUserRepository
         throw new NotImplementedException();
     }
 
-    public async Task<bool> UserExists(string username)
+    public async Task<UserExistsState> UserExists(string username, string emailAddress)
     {
-        return await _context.Users.AnyAsync(user => user.Username.Equals(username.ToLower()));
+        var usernameLC = username.ToLower();
+        var emailAddressLC = emailAddress.ToLower();
+        //TODO this query could be optimized - take max 2 items with less data then stop
+        var existingUsers = await _context.Users.Where(user =>
+            user.Username.Equals(usernameLC)
+            || user.EmailAddress.Equals(emailAddressLC)
+        ).ToListAsync();
+
+        foreach (var user in existingUsers)
+        {
+            if (user.Username.Equals(usernameLC)) return UserExistsState.UsernameExists;
+            if (user.EmailAddress.Equals(emailAddressLC)) return UserExistsState.EmailAddressExists;
+        }
+
+        return UserExistsState.No;
     }
 }
