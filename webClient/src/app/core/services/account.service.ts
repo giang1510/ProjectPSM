@@ -4,6 +4,8 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
 import { LoginUser } from '../models/loginUser';
+import { RegisterUser } from '../models/registerUser';
+import { APP_ROUTES } from 'src/app/app-routing.module';
 
 /** 
  * Provide login/out and register features 
@@ -44,5 +46,16 @@ export class AccountService {
   setCurrentUser(user: User){
     localStorage.setItem(AccountService.USER_LOCAL_STORAGE_KEY, JSON.stringify(user));
     this.currentUserSource.next(user);
+  }
+
+  register(registerUser: RegisterUser){
+    console.log(registerUser);
+    return this.http.post<User>(this.baseUrl + APP_ROUTES.REGISTER, registerUser).pipe(
+      map(user => {
+        if(user){
+          this.setCurrentUser(user);
+        }
+      })
+    );
   }
 }
