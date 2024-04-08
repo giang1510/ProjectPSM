@@ -33,3 +33,16 @@
   - dotnet ef migrations add fileName -o Data/Migrations
 - Update database to new schemas
   - dotnet ef database update
+
+# Notes for developer
+
+- Bootstrap
+  - using ngx bootstrap (angular + bootstrap)
+  - theme spacelab using Bootswatch
+- font awesome 6
+  - using angular-fontawesome 0.13 - error when generated via ng in standalone api project
+    -> no standalone API, only components
+
+## Mac
+
+- "chmod 755 filePath" to make file executable
