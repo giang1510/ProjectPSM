@@ -16,8 +16,6 @@ import { ProductListComponent } from '../products/product-list/product-list.comp
 })
 export class HomeComponent implements OnInit{
   members: Member[] | undefined;
-  // TODO remove test icon
-  faCoffee = faCoffee;
 
   constructor(private membersService: MembersService){}
   ngOnInit(): void {
