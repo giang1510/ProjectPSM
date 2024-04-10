@@ -18,9 +18,17 @@ public class ProductRepository : IProductRepository
     }
 
     // TODO implement this
-    public Task<AppUser?> GetProductAsync(string productName)
+    public Task<Product?> GetProductAsync(string productName)
     {
         throw new NotImplementedException();
+    }
+
+    // TODO use Dto instead
+    public async Task<Product?> GetProductByIdAsync(int id)
+    {
+        return await _context.Products
+        .Include(x => x.Reviews)
+        .SingleOrDefaultAsync(x => x.Id == id);
     }
 
     // TODO parameterize this, cause all products should not be allowed
@@ -28,6 +36,7 @@ public class ProductRepository : IProductRepository
     {
         return await _context.Products
             .Include(x => x.Photos)
+            .Include(x => x.Reviews)
             .ProjectTo<ProductCardDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
     }
@@ -39,9 +48,9 @@ public class ProductRepository : IProductRepository
     }
 
     // TODO implement this
-    public Task<bool> SaveAllAsync()
+    public async Task<bool> SaveAllAsync()
     {
-        throw new NotImplementedException();
+        return await _context.SaveChangesAsync() > 0;
     }
 
     // TODO implement this

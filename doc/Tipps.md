@@ -14,8 +14,13 @@
     - Install nvm using setup.exe - https://github.com/coreybutler/nvm-windows/releases
     - nvm install 18.10.0
     - nvm use 18.10.0
-- Fix Error = ɵunwrapWritableSignal
+
+## Common errprs
+
+- ɵunwrapWritableSignal
   - Downgrade VSCode-Extension Angular Languague Service to 17.2.1
+- object cycle detected when retrieving data from server
+  - send Dto instead of entity back
 
 # Tools to install
 
