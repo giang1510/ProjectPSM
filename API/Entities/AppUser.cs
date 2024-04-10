@@ -22,5 +22,7 @@ public class AppUser
     public string? City { get; set; }
     public string? Country { get; set; }
 
+    public List<Review> Reviews { get; set; } = new();
+
     // TODO add photos field
 }

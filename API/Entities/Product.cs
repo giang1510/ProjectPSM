@@ -5,6 +5,7 @@
 /// </summary>
 public class Product
 {
+    // TODO is int really enough?
     public int Id { get; set; }
     public required string Name { get; set; }
     public string? Description { get; set; }
@@ -16,4 +17,5 @@ public class Product
     public string? Manufacturer { get; set; }
 
     public List<ProductPhoto> Photos { get; set; } = new();
+    public List<Review> Reviews { get; set; } = new();
 }
