@@ -85,20 +85,6 @@
   color: #341f97;
   text-decoration: underline;
 }
-.product-grid .rating {
-  color: #fbb230;
-  font-size: 13px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-.product-grid .rating li {
-  display: inline-block;
-  padding: 5px;
-}
-.product-grid .rating fa-icon.far {
-  color: #999;
-}
 
 @media screen and (max-width: 990px) {
   .product-grid {

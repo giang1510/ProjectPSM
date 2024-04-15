@@ -62,13 +62,16 @@
       </ul> -->
   </div>
   <div class="product-content">
-    <ul class="rating">
+    <!-- <ul class="rating">
       <li><fa-icon [icon]="fa.star"></fa-icon></li>
       <li><fa-icon [icon]="fa.star"></fa-icon></li>
       <li><fa-icon [icon]="fa.star"></fa-icon></li>
-      <li><fa-icon [icon]="fa.star"></fa-icon></li>
-      <li><fa-icon [icon]="fa.star" class="far"></fa-icon></li>
-    </ul>
+      <li>
+        <fa-icon [icon]="fa.starHalf"></fa-icon>
+      </li>
+      <li><fa-icon [icon]="fa.starEmpty"></fa-icon></li>
+    </ul> -->
+    <app-product-rating [productRating]="productRating"></app-product-rating>
     <h3 class="title">
       <a
         href="#

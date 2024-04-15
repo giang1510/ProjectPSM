@@ -1,4 +1,5 @@
 import { Photo } from "./photo";
+import { Review } from "./review";
 
 export interface ProductCard{
     name: string;
@@ -7,4 +8,5 @@ export interface ProductCard{
     isActive: boolean;
     manufacturer: string;
     photos: Photo[];
+    reviews: Review[];
 }
