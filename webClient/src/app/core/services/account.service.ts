@@ -25,7 +25,6 @@ export class AccountService {
    * Make a http post request with login data
    */
   login(loginUser: LoginUser){
-    console.log(this.baseUrl);
     return this.http.post<User>(this.baseUrl + 'login', loginUser).pipe(
       map((user: User) => {
         if(user){
