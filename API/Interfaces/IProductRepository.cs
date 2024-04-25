@@ -11,4 +11,5 @@ public interface IProductRepository
     Task<Product?> GetProductAsync(string productName);
     Task<bool> ProductExists(string productName);
     Task<Product?> GetProductByIdAsync(int id);
+    Task<ProductDetailDto?> GetProductDetailAsync(int id);
 }

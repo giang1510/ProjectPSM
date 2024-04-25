@@ -26,9 +26,16 @@ public class ProductRepository : IProductRepository
     // TODO use Dto instead
     public async Task<Product?> GetProductByIdAsync(int id)
     {
+        return await _context.Products.FindAsync(id);
+    }
+
+    public async Task<ProductDetailDto?> GetProductDetailAsync(int id)
+    {
         return await _context.Products
-        .Include(x => x.Reviews)
-        .SingleOrDefaultAsync(x => x.Id == id);
+            .Include(x => x.Photos)
+            .Include(x => x.Reviews)
+            .ProjectTo<ProductDetailDto>(_mapper.ConfigurationProvider)
+            .SingleOrDefaultAsync(x => x.Id == id);
     }
 
     // TODO parameterize this, cause all products should not be allowed

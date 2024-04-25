@@ -32,10 +32,10 @@ public class ProductsController : BaseApiController
 
     [AllowAnonymous]
     [HttpGet("{id}")]
-    public async Task<ActionResult<IEnumerable<ProductCardDto>>> GetProductById(int id)
+    public async Task<ActionResult<ProductDetailDto>> GetProductById(int id)
     {
-        var products = await _productRepository.GetProductByIdAsync(id);
-        return Ok(products);
+        var productDetail = await _productRepository.GetProductDetailAsync(id);
+        return Ok(productDetail);
     }
 
     // TODO Send back better responses in error cases

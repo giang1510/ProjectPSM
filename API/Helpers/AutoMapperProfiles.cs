@@ -12,5 +12,6 @@ public class AutoMapperProfiles : Profile
         CreateMap<Product, ProductCardDto>();
         CreateMap<ProductPhoto, PhotoDto>();
         CreateMap<Review, ReviewDto>();
+        CreateMap<Product, ProductDetailDto>();
     }
 }
