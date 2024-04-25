@@ -1,45 +1,10 @@
-<!-- <div class="col-md-3 col-sm-6">
-    <div class="product-grid">
-      <div class="product-image">
-        <a href="#" class="image">
-          <img
-            class="img-1"
-            src="https://bestjquery.com/tutorial/product-grid/demo193/images/img-1.jpg"
-          />
-        </a>
-        <ul class="product-links">
-          <li>
-            <a href="#"><fa-icon [icon]="fa.shoppingCart"></fa-icon></a>
-          </li>
-          <li>
-            <a href="#"><fa-icon [icon]="fa.heart"></fa-icon></a>
-          </li>
-          <li>
-            <a href="#"><fa-icon [icon]="fa.eye"></fa-icon></a>
-          </li>
-          <li>
-            <a href="#"><fa-icon [icon]="fa.random"></fa-icon></a>
-          </li>
-        </ul>
-      </div>
-      <div class="product-content">
-        <ul class="rating">
-          <li><fa-icon [icon]="fa.star"></fa-icon></li>
-          <li><fa-icon [icon]="fa.star"></fa-icon></li>
-          <li><fa-icon [icon]="fa.star"></fa-icon></li>
-          <li><fa-icon [icon]="fa.star"></fa-icon></li>
-          <li><fa-icon [icon]="fa.star" class="far"></fa-icon></li>
-        </ul>
-        <h3 class="title"><a href="#">Women's T-Shirt</a></h3>
-        <div class="price">$77.99</div>
-      </div>
-    </div>
-  </div> -->
-
-<!-- <div class="col-md-3 col-sm-6"> -->
 <div class="product-grid" *ngIf="productCard">
   <div class="product-image">
-    <a href="#" class="image">
+    <a
+      href="{{ urls.productDetail }}"
+      routerLinkActive="router-link-active"
+      class="image"
+    >
       <img
         class="img-1"
         src="{{ productCard.photos[0].url }}"
@@ -62,19 +27,10 @@
       </ul> -->
   </div>
   <div class="product-content">
-    <!-- <ul class="rating">
-      <li><fa-icon [icon]="fa.star"></fa-icon></li>
-      <li><fa-icon [icon]="fa.star"></fa-icon></li>
-      <li><fa-icon [icon]="fa.star"></fa-icon></li>
-      <li>
-        <fa-icon [icon]="fa.starHalf"></fa-icon>
-      </li>
-      <li><fa-icon [icon]="fa.starEmpty"></fa-icon></li>
-    </ul> -->
     <app-product-rating [productRating]="productRating"></app-product-rating>
     <h3 class="title">
       <a
-        href="#
+        href="{{ urls.productDetail }}
         "
         >{{ productCard.name }}</a
       >

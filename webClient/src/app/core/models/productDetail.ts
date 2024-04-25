@@ -1,11 +1,14 @@
 import { Photo } from "./photo";
 import { Review } from "./review";
 
-export interface ProductCard{
+export interface ProductDetail{
     id: number;
     name: string;
+    description: string;
     price: number;
-    category: string;
+    category: string
+    createdDate: Date;
+    lastUpdated: Date;
     isActive: boolean;
     manufacturer: string;
     photos: Photo[];

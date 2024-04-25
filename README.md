@@ -151,6 +151,7 @@ Project Link: [https://github.com/giang1510/ProjectPSM](https://github.com/giang
 
 - [Angular file structure](https://medium.com/@shijin_nath/angular-right-file-structure-and-best-practices-that-help-to-scale-2020-52ce8d967df5)
 - [Bootstrap product cards](https://freefrontend.com/bootstrap-product-cards/)
+- [Bootstrap product detail](https://mdbootstrap.com/snippets/standard/mdbootstrap/4852176?view=project#html-tab-view)
 - [Font Awesome](https://fontawesome.com)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
