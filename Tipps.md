@@ -16,6 +16,10 @@
     - nvm use 18.10.0
 - Fix Error = ɵunwrapWritableSignal
   - Downgrade VSCode-Extension Angular Languague Service to 17.2.1
+- Reasons for error \_\_EFMigrationsHistory
+  - Typo in the connection string in appsettings.development.json
+  - A typo in the Program.cs AddDbContext method that uses the connection string
+  - Using a version of Entity Framework that does not match the .Net runtime they are using e.g using .Net 6 but attempting to use Entity Framework provider with a version number of 7
 
 # Tools to install
 
