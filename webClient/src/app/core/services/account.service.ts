@@ -18,6 +18,7 @@ export class AccountService {
   private readonly baseUrl = environment.apiUrl + 'account/';
   private currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
+  currentUser: User | undefined;
 
   constructor(private http: HttpClient) { }
 
@@ -45,6 +46,7 @@ export class AccountService {
   setCurrentUser(user: User){
     localStorage.setItem(AccountService.USER_LOCAL_STORAGE_KEY, JSON.stringify(user));
     this.currentUserSource.next(user);
+    this.currentUser = user;
   }
 
   register(registerUser: RegisterUser){

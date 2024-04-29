@@ -19,6 +19,7 @@ import { APP_ROUTES } from 'src/app/app-routing.module';
 export class ProductCardComponent implements OnInit{
   @Input() productCard: ProductCard | undefined;
   productRating: ProductRating = {
+    ratable: false,
     ratings: []
   };
   urls = {

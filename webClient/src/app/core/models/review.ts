@@ -3,4 +3,5 @@ export interface Review{
     headline: string;
     writtenReview: string;
     created: Date;
+    userId: number;
 }
