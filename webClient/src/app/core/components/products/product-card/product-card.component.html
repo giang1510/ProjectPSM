@@ -1,0 +1,43 @@
+<div class="product-grid" *ngIf="productCard">
+  <div class="product-image">
+    <a
+      href="{{ urls.productDetail }}"
+      routerLinkActive="router-link-active"
+      class="image"
+    >
+      <img
+        class="img-1"
+        src="{{ productCard.photos[0].url }}"
+        alt="{{ productCard.name }}"
+      />
+    </a>
+    <!-- <ul class="product-links">
+        <li>
+          <a href="#"><fa-icon [icon]="fa.shoppingCart"></fa-icon></a>
+        </li>
+        <li>
+          <a href="#"><fa-icon [icon]="fa.heart"></fa-icon></a>
+        </li>
+        <li>
+          <a href="#"><fa-icon [icon]="fa.eye"></fa-icon></a>
+        </li>
+        <li>
+          <a href="#"><fa-icon [icon]="fa.random"></fa-icon></a>
+        </li>
+      </ul> -->
+  </div>
+  <div class="product-content">
+    <app-product-rating [productRating]="productRating"></app-product-rating>
+    <h3 class="title">
+      <a
+        href="{{ urls.productDetail }}
+        "
+        >{{ productCard.name }}</a
+      >
+    </h3>
+    <div class="price">
+      {{ productCard.price < 0 ? "No price" : productCard.price }}
+    </div>
+  </div>
+</div>
+<!-- </div> -->

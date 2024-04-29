@@ -18,10 +18,7 @@ import { TextInputComponent } from '../../forms/text-input/text-input.component'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit{
-  loginUser: LoginUser = {
-    username: '',
-    password: ''
-  };
+  loginUser: LoginUser | undefined;
   loginForm: FormGroup = new FormGroup({});
   
   constructor(private accountService: AccountService, private router: Router,
@@ -32,6 +29,8 @@ export class LoginComponent implements OnInit{
   }
 
   login(): void{
+    this.loginUser = this.loginForm.value;
+    if(!this.loginUser) return;
     this.accountService.login(this.loginUser).subscribe({
       next: _ => {
         this.router.navigateByUrl('/');

@@ -4,6 +4,8 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
 import { LoginUser } from '../models/loginUser';
+import { RegisterUser } from '../models/registerUser';
+import { APP_ROUTES } from 'src/app/app-routing.module';
 
 /** 
  * Provide login/out and register features 
@@ -16,6 +18,7 @@ export class AccountService {
   private readonly baseUrl = environment.apiUrl + 'account/';
   private currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
+  currentUser: User | undefined;
 
   constructor(private http: HttpClient) { }
 
@@ -23,7 +26,6 @@ export class AccountService {
    * Make a http post request with login data
    */
   login(loginUser: LoginUser){
-    console.log(this.baseUrl);
     return this.http.post<User>(this.baseUrl + 'login', loginUser).pipe(
       map((user: User) => {
         if(user){
@@ -44,5 +46,17 @@ export class AccountService {
   setCurrentUser(user: User){
     localStorage.setItem(AccountService.USER_LOCAL_STORAGE_KEY, JSON.stringify(user));
     this.currentUserSource.next(user);
+    this.currentUser = user;
+  }
+
+  register(registerUser: RegisterUser){
+    console.log(registerUser);
+    return this.http.post<User>(this.baseUrl + APP_ROUTES.REGISTER, registerUser).pipe(
+      map(user => {
+        if(user){
+          this.setCurrentUser(user);
+        }
+      })
+    );
   }
 }

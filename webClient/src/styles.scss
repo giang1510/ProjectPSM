@@ -8,21 +8,20 @@
 
 // Your variable overrides go here, e.g.:
 $h1-font-size: 3rem;
-$primary: #1D63DC;
+$primary: #1d63dc;
 
 @import "node_modules/bootswatch/dist/spacelab/variables";
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/bootswatch/dist/spacelab/bootswatch";
 
-
 // Custom setup with existing variables
 // TODO Setup colors
-fa-icon{
-    color: $white;
-}
+// fa-icon {
+//   color: black;
+// }
 .btn-outline-primary {
-    --bs-btn-color: white;
-    &:hover{
-        border-color: white;
-    }
+  --bs-btn-color: white;
+  &:hover {
+    border-color: white;
+  }
 }

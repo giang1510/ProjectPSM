@@ -1,0 +1,8 @@
+<ul class="rating" (mouseleave)="onMouseOut()">
+  <li *ngFor="let symbol of ratingSymbols; index as i">
+    <fa-icon [icon]="symbol" (mouseenter)="onMouseEnter(i)"></fa-icon>
+  </li>
+  <span *ngIf="!productRating?.ratable" class="text-muted ms-2">{{
+    productRating?.ratings?.length
+  }}</span>
+</ul>

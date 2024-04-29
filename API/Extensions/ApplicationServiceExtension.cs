@@ -18,6 +18,7 @@ public static class ApplicationServiceExtension
             opt.UseSqlite(config.GetConnectionString(ConfigurationKeys.DBDefaultConnection));
         });
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ITokenService, TokenService>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         services.AddCors();
@@ -34,6 +35,7 @@ public static class ApplicationServiceExtension
             var context = services.GetRequiredService<DataContext>();
             await context.Database.MigrateAsync();
             await Seed.SeedUsers(context);
+            await Seed.SeedProducts(context);
         }
         catch (Exception ex)
         {

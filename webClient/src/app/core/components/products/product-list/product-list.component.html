@@ -1,0 +1,9 @@
+<div class="row" *ngIf="productCards$">
+  <!-- <div class="col-2" *ngFor="let productCard of productCards$ | async"> -->
+  <app-product-card
+    *ngFor="let productCard of productCards$ | async"
+    [productCard]="productCard"
+    class="col-md-3 col-sm-6 mt-5"
+  ></app-product-card>
+  <!-- </div> -->
+</div>
