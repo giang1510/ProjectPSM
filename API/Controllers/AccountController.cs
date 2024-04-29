@@ -41,11 +41,7 @@ public class AccountController : BaseApiController
         };
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
-        return new UserDto
-        {
-            Username = user.Username,
-            Token = _tokenService.CreateToken(user)
-        };
+        return CreateUserDto(user);
     }
 
     [HttpPost("login")] // api/account/login
@@ -65,10 +61,16 @@ public class AccountController : BaseApiController
             if (passwordHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password!");
         }
 
+        return CreateUserDto(user);
+    }
+
+    private UserDto CreateUserDto(AppUser user)
+    {
         return new UserDto
         {
             Username = user.Username,
-            Token = _tokenService.CreateToken(user)
+            Token = _tokenService.CreateToken(user),
+            Id = user.Id
         };
     }
 }
