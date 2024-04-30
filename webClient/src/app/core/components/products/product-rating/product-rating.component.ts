@@ -14,18 +14,20 @@ import { ProductService } from 'src/app/core/services/product.service';
   styleUrls: ['./product-rating.component.scss']
 })
 export class ProductRatingComponent implements OnInit{
+  // Constants
+  readonly ROUND_DOWN_LIMIT = 0.25;
+  readonly ROUND_UP_LIMIT = 0.75;
   // Fontawsome icons
   readonly fa = {
     star: faStarSolid,
     starHalf: faStarHalfStroke,
     starEmpty: faStarRegular
   }
+
+  // Parameters
   @Input() productRating: ProductRating | undefined;
 
-  availableSymbols = {
-    0: this.fa.starEmpty,
-    1: this.fa.star
-  }
+  // Variables
   ratingSymbols = [
     this.fa.starEmpty, this.fa.starEmpty, this.fa.starEmpty, this.fa.starEmpty, this.fa.starEmpty
   ];
@@ -67,9 +69,18 @@ export class ProductRatingComponent implements OnInit{
 
   //TODO Implement this for decimal number
   private populateSymbols(fullCount: number){
-    for(var i = 0; i < 5; i++){
-      if(i < fullCount){
-        this.ratingSymbols[i] = this.fa.star;
+    for(let i = 0; i < 5; i++){
+      let diff = fullCount - i;
+      if(diff > 0){
+        if(diff < this.ROUND_DOWN_LIMIT){
+          this.ratingSymbols[i] = this.fa.starEmpty;
+        }
+        else if(diff > this.ROUND_UP_LIMIT){
+          this.ratingSymbols[i] = this.fa.star;
+        }
+        else{
+          this.ratingSymbols[i] = this.fa.starHalf;
+        }
       }
       else{
         this.ratingSymbols[i] = this.fa.starEmpty;
@@ -79,6 +90,16 @@ export class ProductRatingComponent implements OnInit{
 
   private populateSymbolsFromData(){
     if(!this.productRating || this.productRating.ratings.length < 1) return;
-    this.populateSymbols(this.productRating.ratings[0]);
+    console.log(this.getAverage(this.productRating.ratings));
+    this.populateSymbols(this.getAverage(this.productRating.ratings));
+  }
+
+  private getAverage(numbers: number[]): number{
+    if(numbers.length < 1) return 0;
+    let sum = 0;
+    numbers.forEach(function(number){
+      sum += number;
+    });
+    return sum / numbers.length;
   }
 }
