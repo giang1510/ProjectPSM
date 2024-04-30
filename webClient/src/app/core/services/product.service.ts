@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ProductCard } from '../models/productCard';
 import { ProductDetail } from '../models/productDetail';
+import { ReviewEntry } from '../models/reviewEntry';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,9 @@ export class ProductService {
 
   getProductDetail(id: number){
     return this.http.get<ProductDetail>(this.baseUrl + '/' + id);
+  }
+
+  addReview(review: ReviewEntry){
+    return this.http.post(this.baseUrl + '/review', review);
   }
 }

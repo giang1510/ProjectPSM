@@ -49,7 +49,8 @@ export class ProductDetailComponent implements OnInit{
       .reduce<number[]>((arr, elem) => arr.concat(elem.rating), []);
     this.productRating = {
       ratable: false,
-      ratings: ratings
+      ratings: ratings,
+      productId: this.productDetail.id
     };
   }
 
@@ -63,13 +64,15 @@ export class ProductDetailComponent implements OnInit{
     if(userReview){
       this.userProductRating = {
         ratable: true,
-        ratings: [userReview.rating]
+        ratings: [userReview.rating],
+        productId: this.productDetail.id
       }
     }
     else{
       this.userProductRating = {
         ratable: true,
-        ratings: []
+        ratings: [],
+        productId: this.productDetail.id
       }
     }
   }

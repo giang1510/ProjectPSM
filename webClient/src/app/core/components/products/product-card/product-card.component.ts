@@ -18,10 +18,7 @@ import { APP_ROUTES } from 'src/app/app-routing.module';
 })
 export class ProductCardComponent implements OnInit{
   @Input() productCard: ProductCard | undefined;
-  productRating: ProductRating = {
-    ratable: false,
-    ratings: []
-  };
+  productRating: ProductRating | undefined;
   urls = {
     productDetail: APP_ROUTES.PRODUCT_DETAIL
   };
@@ -46,9 +43,13 @@ export class ProductCardComponent implements OnInit{
 
   initRating(){
     if(!this.productCard) return;
-    console.log(this.productCard.reviews);
+    this.productRating = {
+      ratable: false,
+      ratings: [],
+      productId: this.productCard.id
+    };
     this.productCard.reviews.forEach(review => {
-      this.productRating.ratings.push(review.rating);
+      this.productRating?.ratings.push(review.rating);
     });
   }
 

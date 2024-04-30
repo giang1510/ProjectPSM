@@ -4,6 +4,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconDefinition, faStarHalfStroke, faStar as faStarSolid} from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 import { ProductRating } from 'src/app/core/models/productRating';
+import { ProductService } from 'src/app/core/services/product.service';
 
 @Component({
   selector: 'app-product-rating',
@@ -29,6 +30,8 @@ export class ProductRatingComponent implements OnInit{
     this.fa.starEmpty, this.fa.starEmpty, this.fa.starEmpty, this.fa.starEmpty, this.fa.starEmpty
   ];
   private initialSymbols: IconDefinition[] = [];
+
+  constructor(private productService: ProductService){}
   
   ngOnInit(): void {
     this.initSymbols();
@@ -49,6 +52,20 @@ export class ProductRatingComponent implements OnInit{
     this.ratingSymbols = [...this.initialSymbols];
   }
 
+  //TODO Implement reload mechanism
+  // Certain properties should be filled
+  onClick(symbolIndex: number){
+    if(!this.productRating || !this.productRating.ratable) return;
+    this.productService.addReview({
+      rating: symbolIndex + 1,
+      productId: this.productRating.productId
+    }).subscribe({
+      next: review => console.log(review),
+      error: error => console.log(error)
+    });
+  }
+
+  //TODO Implement this for decimal number
   private populateSymbols(fullCount: number){
     for(var i = 0; i < 5; i++){
       if(i < fullCount){
