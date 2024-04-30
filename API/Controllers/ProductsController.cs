@@ -51,7 +51,7 @@ public class ProductsController : BaseApiController
         var user = await _userRepository.GetUserByUsernameAsync(username);
         if (user == null) return NotFound();
 
-        if (product.Reviews.Any(x => x.UserId == user.Id || x.ProductId == product.Id))
+        if (product.Reviews.Any(x => x.UserId == user.Id))
         {
             return BadRequest("A review for the product already exists");
         }
