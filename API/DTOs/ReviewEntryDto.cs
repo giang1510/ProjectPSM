@@ -11,7 +11,7 @@ public class ReviewEntryDto
     public short Rating { get; set; }
 
     [StringLength(128, MinimumLength = 4)]
-    public required string Headline { get; set; }
+    public string? Headline { get; set; }
     public string? WrittenReview { get; set; }
     public int ProductId { get; set; }
 }

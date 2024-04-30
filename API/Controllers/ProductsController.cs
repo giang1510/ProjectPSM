@@ -43,10 +43,10 @@ public class ProductsController : BaseApiController
     public async Task<ActionResult<ReviewDto>> AddReview(ReviewEntryDto reviewEntryDto)
     {
         var product = await _productRepository.GetProductByIdAsync(reviewEntryDto.ProductId);
-        if (product == null) return NotFound();
+        if (product == null) return NotFound("Product not found!");
 
         var username = User.GetUsername();
-        if (username == null) return NotFound();
+        if (username == null) return NotFound("User not found!");
 
         var user = await _userRepository.GetUserByUsernameAsync(username);
         if (user == null) return NotFound();

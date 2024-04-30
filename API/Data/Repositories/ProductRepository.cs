@@ -26,7 +26,10 @@ public class ProductRepository : IProductRepository
     // TODO use Dto instead
     public async Task<Product?> GetProductByIdAsync(int id)
     {
-        return await _context.Products.FindAsync(id);
+        return await _context.Products
+            .Include(x => x.Photos)
+            .Include(x => x.Reviews)
+            .SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task<ProductDetailDto?> GetProductDetailAsync(int id)

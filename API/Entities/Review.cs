@@ -4,7 +4,7 @@ public class Review
 {
     public int Id { get; set; }
     public short Rating { get; set; }
-    public required string Headline { get; set; }
+    public string? Headline { get; set; }
     public string? WrittenReview { get; set; }
     public DateTime Created { get; set; } = DateTime.UtcNow;
 
