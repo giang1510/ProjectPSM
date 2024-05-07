@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Controllers;
 
 /// <summary>
-/// Handles api calls, that involve user data
+/// Handles requests, that involve user data
 /// path: api/users
 /// </summary>
 // TODO use DTO instead of entity 
@@ -22,6 +22,10 @@ public class UsersController : BaseApiController
         _userRepository = userRepository;
     }
 
+    /// <summary>
+    /// Handle getting multiple app members
+    /// </summary>
+    /// <returns></returns>
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AppUser>>> GetMembers()
     {
@@ -30,6 +34,11 @@ public class UsersController : BaseApiController
         return Ok(users);
     }
 
+    /// <summary>
+    /// Handle getting information of an user
+    /// </summary>
+    /// <param name="username"></param>
+    /// <returns></returns>
     [HttpGet("{username}")]
     public async Task<ActionResult<AppUser>> GetUser(string username)
     {

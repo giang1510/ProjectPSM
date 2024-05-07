@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
+
+/// <summary>
+/// Handle product related requests
+/// </summary>
 [Authorize]
 public class ProductsController : BaseApiController
 {
@@ -22,6 +26,10 @@ public class ProductsController : BaseApiController
         this._mapper = _mapper;
     }
 
+    /// <summary>
+    /// Handle getting multiple products
+    /// </summary>
+    /// <returns></returns>
     [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ProductCardDto>>> GetProducts()
@@ -30,6 +38,11 @@ public class ProductsController : BaseApiController
         return Ok(products);
     }
 
+    /// <summary>
+    /// Handle getting a product page 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<ActionResult<ProductDetailDto>> GetProductById(int id)
@@ -38,6 +51,11 @@ public class ProductsController : BaseApiController
         return Ok(productDetail);
     }
 
+    /// <summary>
+    /// Handle adding new review to a product
+    /// </summary>
+    /// <param name="reviewEntryDto"></param>
+    /// <returns></returns>
     // TODO Send back better responses in error cases
     [HttpPost("review")] // api/products/review
     public async Task<ActionResult<ReviewDto>> AddReview(ReviewEntryDto reviewEntryDto)

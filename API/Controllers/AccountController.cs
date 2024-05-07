@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
+/// <summary>
+/// Controller to handle login and register
+/// path: api/account 
+/// </summary>
 public class AccountController : BaseApiController
 {
     private readonly DataContext _context;
@@ -21,6 +25,11 @@ public class AccountController : BaseApiController
         _tokenService = tokenService;
     }
 
+    /// <summary>
+    /// Handle register request
+    /// </summary>
+    /// <param name="registerDto"></param>
+    /// <returns></returns>
     [HttpPost("register")] // api/account/register
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
@@ -44,6 +53,11 @@ public class AccountController : BaseApiController
         return CreateUserDto(user);
     }
 
+    /// <summary>
+    /// Handle login request
+    /// </summary>
+    /// <param name="loginDto"></param>
+    /// <returns></returns>
     [HttpPost("login")] // api/account/login
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
@@ -64,6 +78,11 @@ public class AccountController : BaseApiController
         return CreateUserDto(user);
     }
 
+    /// <summary>
+    /// Create response user object with minimal information
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
     private UserDto CreateUserDto(AppUser user)
     {
         return new UserDto
