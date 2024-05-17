@@ -7,8 +7,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API;
 
+/// <summary>
+/// Populate database with test data
+/// </summary>
 public static class Seed
 {
+    /// <summary>
+    /// Create test users
+    /// </summary>
+    /// <param name="context"></param>
+    /// <returns></returns>
     public static async Task SeedUsers(DataContext context)
     {
         if (await context.Users.AnyAsync()) return;
@@ -36,6 +44,11 @@ public static class Seed
         await context.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Create test products
+    /// </summary>
+    /// <param name="context"></param>
+    /// <returns></returns>
     public static async Task SeedProducts(DataContext context)
     {
         if (await context.Products.AnyAsync()) return;
