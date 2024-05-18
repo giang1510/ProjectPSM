@@ -1,5 +1,8 @@
 ﻿namespace API.DTOs;
 
+/// <summary>
+/// Product data to show in the detail page on client side
+/// </summary>
 public class ProductDetailDto
 {
     public int Id { get; set; }

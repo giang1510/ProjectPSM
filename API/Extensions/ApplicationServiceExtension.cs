@@ -11,6 +11,12 @@ namespace API.Extensions;
 /// </summary>
 public static class ApplicationServiceExtension
 {
+    /// <summary>
+    /// Extension method to add services to builder.services in Program.cs
+    /// </summary>
+    /// <param name="services">builder.services</param>
+    /// <param name="config">currently used for database config</param>
+    /// <returns></returns>
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
     {
         services.AddDbContext<DataContext>(opt =>
@@ -26,6 +32,12 @@ public static class ApplicationServiceExtension
         return services;
     }
 
+    // TODO Move this method to a more suited place
+    /// <summary>
+    /// Extension method to create seed data in Program.cs
+    /// </summary>
+    /// <param name="app"></param>
+    /// <returns></returns>
     public static async Task MigrateSeedData(this WebApplication app)
     {
         using var scope = app.Services.CreateScope();

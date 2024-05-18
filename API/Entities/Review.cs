@@ -1,5 +1,8 @@
 ﻿namespace API.Entities;
 
+/// <summary>
+/// Data row of a review in the database
+/// </summary>
 public class Review
 {
     public int Id { get; set; }

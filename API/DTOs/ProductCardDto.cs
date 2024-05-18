@@ -2,6 +2,9 @@
 
 namespace API.DTOs;
 
+/// <summary>
+/// Product data to show in a list from server to client
+/// </summary>
 public class ProductCardDto
 {
     public int Id { get; set; }
