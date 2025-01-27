@@ -1,6 +1,5 @@
 # Todo
 
-- Create skeleton app
-  - ASP .NET Core Server wit simple SQLite database
-  - Angular clients
+- Upgrade to .NET 8
+- Upgrade to Angular 18
 - Implement product data access
