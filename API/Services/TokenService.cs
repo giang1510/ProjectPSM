@@ -10,6 +10,9 @@ namespace API.Services;
 // TODO make this more secure
 // maybe: asymmetric key instead of symmetric
 // maybe: using something else instead of JWT for session mechanism
+/// <summary>
+/// Service for handling token (user authentication)
+/// </summary>
 public class TokenService : ITokenService
 {
     private readonly SymmetricSecurityKey? _key;
@@ -20,6 +23,11 @@ public class TokenService : ITokenService
         if (tokenKey != null) _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
     }
 
+    /// <summary>
+    /// Create a token for member access
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
     public string CreateToken(AppUser user)
     {
         var claims = new List<Claim>{

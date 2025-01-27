@@ -1,5 +1,8 @@
 ﻿namespace API.DTOs;
 
+/// <summary>
+/// Data of other users from server to client
+/// </summary>
 public class MemberDto
 {
     public required string Username { get; set; }

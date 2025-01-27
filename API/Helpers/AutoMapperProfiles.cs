@@ -4,6 +4,9 @@ using AutoMapper;
 
 namespace API.Helpers;
 
+/// <summary>
+/// Configure auto mapping between entities and dtos
+/// </summary>
 public class AutoMapperProfiles : Profile
 {
     public AutoMapperProfiles()

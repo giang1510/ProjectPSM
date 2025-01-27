@@ -3,6 +3,9 @@ using API.Entities;
 
 namespace API;
 
+/// <summary>
+/// Interface for ProductRepository
+/// </summary>
 public interface IProductRepository
 {
     void Update(Product product);

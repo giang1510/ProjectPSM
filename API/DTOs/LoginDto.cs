@@ -2,6 +2,9 @@
 
 namespace API.DTOs;
 
+/// <summary>
+/// Login data from client to server
+/// </summary>
 public class LoginDto
 {
     [Required(AllowEmptyStrings = false)]
