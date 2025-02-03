@@ -19,14 +19,15 @@ public static class IdentityServiceExtension
     public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
     {
         // TODO make it more secure
+        var tokenKey = config[ConfigurationKeys.TokenKey];
+        if (tokenKey == null) throw new ArgumentNullException(nameof(tokenKey));
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    // TODO throw exception when token key is empty
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config[ConfigurationKeys.TokenKey])),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey)),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
