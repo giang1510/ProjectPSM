@@ -2,8 +2,8 @@
 
 ## General
 
-- Get access to Amazon Product Advertising API
 - Implement product data access
+- Get access to Amazon Product Advertising API (need the website first)
 
 ## API
 
