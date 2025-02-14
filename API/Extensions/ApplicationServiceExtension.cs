@@ -26,6 +26,7 @@ public static class ApplicationServiceExtension
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IWebScrapeService, WebScrapeService>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         services.AddCors();
 

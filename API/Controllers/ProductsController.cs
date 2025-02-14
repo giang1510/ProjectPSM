@@ -17,13 +17,15 @@ public class ProductsController : BaseApiController
     private readonly IProductRepository _productRepository;
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
+    private readonly IWebScrapeService _webScrapeService;
 
     public ProductsController(IProductRepository productRepository, IUserRepository _userRepository,
-        IMapper _mapper)
+        IMapper _mapper, IWebScrapeService _webScrapeService)
     {
         _productRepository = productRepository;
         this._userRepository = _userRepository;
         this._mapper = _mapper;
+        this._webScrapeService = _webScrapeService;
     }
 
     /// <summary>
@@ -88,6 +90,18 @@ public class ProductsController : BaseApiController
         if (!await _productRepository.SaveAllAsync()) return BadRequest("Failed to add new review");
 
         return _mapper.Map<ReviewDto>(review);
+    }
+
+    /// <summary>
+    /// Handle getting multiple products
+    /// </summary>
+    /// <returns></returns>
+    [AllowAnonymous]
+    [HttpGet("webscrape")] // api/products/webscrape
+    public async Task<ActionResult<string>> GetWebScrapeResult(WebScrapeEntryDto webScrapeEntryDto)
+    {
+        var webScrapeResult = await _webScrapeService.GetHtmlStringAsync(webScrapeEntryDto.Url);
+        return Ok(webScrapeResult);
     }
 
 }
