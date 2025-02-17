@@ -10,7 +10,7 @@ namespace API.Controllers;
 
 /// <summary>
 /// Controller to handle login and register
-/// path: api/account 
+/// path: api/account
 /// </summary>
 public class AccountController : BaseApiController
 {
@@ -18,7 +18,11 @@ public class AccountController : BaseApiController
     private readonly IUserRepository _userRepository;
     private readonly ITokenService _tokenService;
 
-    public AccountController(DataContext context, IUserRepository userRepository, ITokenService tokenService)
+    public AccountController(
+        DataContext context,
+        IUserRepository userRepository,
+        ITokenService tokenService
+    )
     {
         _context = context;
         _userRepository = userRepository;
@@ -34,17 +38,19 @@ public class AccountController : BaseApiController
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
         // TODO better way to handle bad request
-        var userExistsState = await _userRepository.UserExists(registerDto.Username, registerDto.EmailAddress);
-        if (userExistsState == UserExistsState.UsernameExists) return BadRequest("Username is taken.");
-        if (userExistsState == UserExistsState.EmailAddressExists) return BadRequest("Email address is taken.");
+        var userExistsState = await _userRepository.UserExists(
+            registerDto.Username,
+            registerDto.EmailAddress
+        );
+        if (userExistsState == UserExistsState.UsernameExists)
+            return BadRequest("Username is taken.");
+        if (userExistsState == UserExistsState.EmailAddressExists)
+            return BadRequest("Email address is taken.");
 
         // TODO Use UserManager (better mapping)
         using var hmac = new HMACSHA512();
         var user = new AppUser
         {
-            Username = registerDto.Username.ToLower(),
-            PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-            PasswordSalt = hmac.Key,
             EmailAddress = registerDto.EmailAddress,
             DateOfBirth = registerDto.DateOfBirth
         };
@@ -64,16 +70,8 @@ public class AccountController : BaseApiController
         var user = await _userRepository.GetUserByUsernameAsync(loginDto.Username);
 
         // TODO better way to handle Unauthorized
-        if (user == null) return Unauthorized("Invalid username!");
-
-        using var hmac = new HMACSHA512(user.PasswordSalt);
-        var passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
-
-        for (int i = 0; i < passwordHash.Length; i++)
-        {
-            // TODO better way to handle Unauthorized
-            if (passwordHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password!");
-        }
+        if (user == null)
+            return Unauthorized("Invalid username!");
 
         return CreateUserDto(user);
     }
@@ -87,7 +85,7 @@ public class AccountController : BaseApiController
     {
         return new UserDto
         {
-            Username = user.Username,
+            Username = user.UserName!,
             Token = _tokenService.CreateToken(user),
             Id = user.Id
         };
