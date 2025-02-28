@@ -1,7 +1,9 @@
 ﻿using API.Constants;
 using API.Data;
+using API.Entities;
 using API.Interfaces;
 using API.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions;
@@ -17,7 +19,10 @@ public static class ApplicationServiceExtension
     /// <param name="services">builder.services</param>
     /// <param name="config">currently used for database config</param>
     /// <returns></returns>
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
+    public static IServiceCollection AddApplicationServices(
+        this IServiceCollection services,
+        IConfiguration config
+    )
     {
         services.AddDbContext<DataContext>(opt =>
         {
@@ -46,7 +51,9 @@ public static class ApplicationServiceExtension
         {
             var context = services.GetRequiredService<DataContext>();
             await context.Database.MigrateAsync();
-            await Seed.SeedUsers(context);
+            var userManager = services.GetRequiredService<UserManager<AppUser>>();
+            var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
+            await Seed.SeedUsers(userManager, roleManager);
             await Seed.SeedProducts(context);
         }
         catch (Exception ex)

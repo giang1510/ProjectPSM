@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.Json;
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace API;
@@ -17,31 +18,55 @@ public static class Seed
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    public static async Task SeedUsers(DataContext context)
+    public static async Task SeedUsers(
+        UserManager<AppUser> userManager,
+        RoleManager<AppRole> roleManager
+    )
     {
-        if (await context.Users.AnyAsync()) return;
+        if (await userManager.Users.AnyAsync())
+            return;
 
         var userData = await File.ReadAllTextAsync("Data/UserSeedData.json");
 
-        var options = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true,
-        };
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, };
 
         var users = JsonSerializer.Deserialize<List<AppUser>>(userData, options);
-        if (users == null) return;
-        foreach (var user in users)
-        {
-            using var hmac = new HMACSHA512();
-            user.Username = user.Username.ToLower();
-            // TODO Make seeding more secure
-            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("1234")); // only for testing purposes
-            user.PasswordSalt = hmac.Key;
+        if (users == null)
+            return;
 
-            context.Users.Add(user);
+        var roles = new List<AppRole>
+        {
+            new AppRole { Name = "Member" },
+            new AppRole { Name = "Admin" },
+            new AppRole { Name = "Moderator" },
+        };
+        foreach (var role in roles)
+        {
+            await roleManager.CreateAsync(role);
         }
 
-        await context.SaveChangesAsync();
+        foreach (var user in users)
+        {
+            await userManager.CreateAsync(user, "Pa$$w0rd");
+            await userManager.AddToRoleAsync(user, "Member");
+        }
+
+        await AddAdminAccount(userManager);
+    }
+
+    private static async Task AddAdminAccount(UserManager<AppUser> userManager)
+    {
+        var admin = new AppUser
+        {
+            UserName = "admin",
+            KnownAs = "Admin",
+            Gender = "",
+            DateOfBirth = new(1900, 1, 1),
+            EmailAddress = "admin@psm.com"
+        };
+
+        await userManager.CreateAsync(admin, "Pa$$w0rd");
+        await userManager.AddToRolesAsync(admin, new[] { "Admin", "Moderator" });
     }
 
     /// <summary>
@@ -51,26 +76,21 @@ public static class Seed
     /// <returns></returns>
     public static async Task SeedProducts(DataContext context)
     {
-        if (await context.Products.AnyAsync()) return;
+        if (await context.Products.AnyAsync())
+            return;
 
         var productData = await File.ReadAllTextAsync("Data/ProductSeedData.json");
         var productPhotoData = await File.ReadAllTextAsync("Data/ProductPhotoSeedData.json");
 
-        var options = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true,
-        };
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, };
 
         var products = JsonSerializer.Deserialize<List<Product>>(productData, options);
         var photos = JsonSerializer.Deserialize<List<PhotoDto>>(productPhotoData, options);
-        if (products == null || photos == null) return;
+        if (products == null || photos == null)
+            return;
         for (int i = 0; i < products.Count; i++)
         {
-            products[i].Photos.Add(new ProductPhoto
-            {
-                Url = photos[i].Url,
-                Product = products[i]
-            });
+            products[i].Photos.Add(new ProductPhoto { Url = photos[i].Url, Product = products[i] });
             context.Products.Add(products[i]);
         }
 

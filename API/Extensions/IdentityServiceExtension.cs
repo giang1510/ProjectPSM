@@ -1,6 +1,9 @@
 ﻿using System.Text;
 using API.Constants;
+using API.Data;
+using API.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
 namespace API;
@@ -16,12 +19,26 @@ public static class IdentityServiceExtension
     /// <param name="services"></param>
     /// <param name="config"></param>
     /// <returns></returns>
-    public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
+    public static IServiceCollection AddIdentityServices(
+        this IServiceCollection services,
+        IConfiguration config
+    )
     {
-        // TODO make it more secure
+        // TODO make this function more secure
+        services
+            .AddIdentityCore<AppUser>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+            })
+            .AddRoles<AppRole>()
+            .AddRoleManager<RoleManager<AppRole>>()
+            .AddEntityFrameworkStores<DataContext>();
+
         var tokenKey = config[ConfigurationKeys.TokenKey];
-        if (tokenKey == null) throw new ArgumentNullException(nameof(tokenKey));
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        if (tokenKey == null)
+            throw new ArgumentNullException(nameof(tokenKey));
+        services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters

@@ -20,7 +20,8 @@ public class TokenService : ITokenService
     public TokenService(IConfiguration config)
     {
         var tokenKey = config[ConfigurationKeys.TokenKey];
-        if (tokenKey != null) _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
+        if (tokenKey != null)
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
     }
 
     /// <summary>
@@ -30,9 +31,10 @@ public class TokenService : ITokenService
     /// <returns></returns>
     public string CreateToken(AppUser user)
     {
-        var claims = new List<Claim>{
-            new Claim(JwtRegisteredClaimNames.NameId, user.Username)
-        };
+        if (user.UserName == null)
+            throw new Exception("No username for user");
+
+        var claims = new List<Claim> { new Claim(JwtRegisteredClaimNames.NameId, user.UserName) };
 
         var credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
@@ -48,6 +50,5 @@ public class TokenService : ITokenService
         var token = tokenHandler.CreateToken(tokenDescriptor);
 
         return tokenHandler.WriteToken(token);
-
     }
 }

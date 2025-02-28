@@ -28,7 +28,7 @@ public class UserRepository : IUserRepository
     /// <returns>Complete user data</returns>
     public async Task<AppUser?> GetUserByUsernameAsync(string username)
     {
-        return await _context.Users.FirstOrDefaultAsync(x => x.Username == username.ToLower());
+        return await _context.Users.FirstOrDefaultAsync(x => x.UserName == username.ToLower());
     }
 
     /// <summary>
@@ -37,8 +37,8 @@ public class UserRepository : IUserRepository
     /// <returns>List of members</returns>
     public async Task<IEnumerable<MemberDto>> GetMembersAsync()
     {
-        return await _context.Users
-            .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+        return await _context
+            .Users.ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
     }
 
@@ -78,18 +78,22 @@ public class UserRepository : IUserRepository
     /// <returns>UserExistsState</returns>
     public async Task<UserExistsState> UserExists(string username, string emailAddress)
     {
-        var usernameLC = username.ToLower();
-        var emailAddressLC = emailAddress.ToLower();
+        var usernameUC = username.ToUpper();
+        var emailAddressUC = emailAddress.ToUpper();
         //TODO this query could be optimized - take max 2 items with less data then stop
-        var existingUsers = await _context.Users.Where(user =>
-            user.Username.Equals(usernameLC)
-            || user.EmailAddress.Equals(emailAddressLC)
-        ).ToListAsync();
+        var existingUsers = await _context
+            .Users.Where(user =>
+                user.NormalizedUserName!.Equals(usernameUC)
+                || user.NormalizedEmail!.Equals(emailAddressUC)
+            )
+            .ToListAsync();
 
         foreach (var user in existingUsers)
         {
-            if (user.Username.Equals(usernameLC)) return UserExistsState.UsernameExists;
-            if (user.EmailAddress.Equals(emailAddressLC)) return UserExistsState.EmailAddressExists;
+            if (user.UserName!.Equals(usernameUC))
+                return UserExistsState.UsernameExists;
+            if (user.EmailAddress.Equals(emailAddressUC))
+                return UserExistsState.EmailAddressExists;
         }
 
         return UserExistsState.No;
