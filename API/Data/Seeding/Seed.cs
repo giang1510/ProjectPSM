@@ -26,7 +26,7 @@ public static class Seed
         if (await userManager.Users.AnyAsync())
             return;
 
-        var userData = await File.ReadAllTextAsync("Data/UserSeedData.json");
+        var userData = await File.ReadAllTextAsync("Data/Seeding/UserSeedData.json");
 
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, };
 
@@ -47,6 +47,7 @@ public static class Seed
 
         foreach (var user in users)
         {
+            // TODO make this more secure
             await userManager.CreateAsync(user, "Pa$$w0rd");
             await userManager.AddToRoleAsync(user, "Member");
         }
@@ -79,8 +80,10 @@ public static class Seed
         if (await context.Products.AnyAsync())
             return;
 
-        var productData = await File.ReadAllTextAsync("Data/ProductSeedData.json");
-        var productPhotoData = await File.ReadAllTextAsync("Data/ProductPhotoSeedData.json");
+        var productData = await File.ReadAllTextAsync("Data/Seeding/ProductSeedData.json");
+        var productPhotoData = await File.ReadAllTextAsync(
+            "Data/Seeding/ProductPhotoSeedData.json"
+        );
 
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, };
 

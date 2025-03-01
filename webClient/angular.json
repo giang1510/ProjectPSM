@@ -76,11 +76,11 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "webClient:build:production"
+              "browserTarget": "webClient:build:production"
             },
             "development": {
               "port": 9200,
-              "buildTarget": "webClient:build:development"
+              "browserTarget": "webClient:build:development"
             }
           },
           "defaultConfiguration": "development"

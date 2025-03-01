@@ -28,7 +28,9 @@ public class UserRepository : IUserRepository
     /// <returns>Complete user data</returns>
     public async Task<AppUser?> GetUserByUsernameAsync(string username)
     {
-        return await _context.Users.FirstOrDefaultAsync(x => x.UserName == username.ToLower());
+        return await _context.Users.FirstOrDefaultAsync(x =>
+            x.NormalizedUserName!.Equals(username.ToUpper())
+        );
     }
 
     /// <summary>

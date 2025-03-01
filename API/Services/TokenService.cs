@@ -19,9 +19,10 @@ public class TokenService : ITokenService
 
     public TokenService(IConfiguration config)
     {
-        var tokenKey = config[ConfigurationKeys.TokenKey];
-        if (tokenKey != null)
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
+        var tokenKey =
+            config[ConfigurationKeys.TokenKey]
+            ?? throw new Exception("Cannot access tokenKey from appsettings.json");
+        _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
     }
 
     /// <summary>
