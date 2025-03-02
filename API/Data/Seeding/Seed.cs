@@ -48,6 +48,7 @@ public static class Seed
         foreach (var user in users)
         {
             // TODO make this more secure
+            // TODO add transaction for potential rollback
             await userManager.CreateAsync(user, "Pa$$w0rd");
             await userManager.AddToRoleAsync(user, "Member");
         }
@@ -66,6 +67,7 @@ public static class Seed
             EmailAddress = "admin@psm.com"
         };
 
+        // TODO add transaction for potential rollback
         await userManager.CreateAsync(admin, "Pa$$w0rd");
         await userManager.AddToRolesAsync(admin, new[] { "Admin", "Moderator" });
     }

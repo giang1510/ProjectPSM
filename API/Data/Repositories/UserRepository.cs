@@ -1,8 +1,10 @@
-﻿using API.DTOs;
+﻿using System.Threading.Tasks;
+using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;
@@ -12,12 +14,12 @@ namespace API.Data;
 /// </summary>
 public class UserRepository : IUserRepository
 {
-    private readonly DataContext _context;
+    private readonly UserManager<AppUser> _userManager;
     private readonly IMapper _mapper;
 
-    public UserRepository(DataContext context, IMapper mapper)
+    public UserRepository(UserManager<AppUser> userManager, IMapper mapper)
     {
-        _context = context;
+        _userManager = userManager;
         _mapper = mapper;
     }
 
@@ -28,7 +30,7 @@ public class UserRepository : IUserRepository
     /// <returns>Complete user data</returns>
     public async Task<AppUser?> GetUserByUsernameAsync(string username)
     {
-        return await _context.Users.FirstOrDefaultAsync(x =>
+        return await _userManager.Users.FirstOrDefaultAsync(x =>
             x.NormalizedUserName!.Equals(username.ToUpper())
         );
     }
@@ -39,7 +41,7 @@ public class UserRepository : IUserRepository
     /// <returns>List of members</returns>
     public async Task<IEnumerable<MemberDto>> GetMembersAsync()
     {
-        return await _context
+        return await _userManager
             .Users.ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
     }
@@ -50,16 +52,7 @@ public class UserRepository : IUserRepository
     /// <returns>List of complete users</returns>
     public async Task<IEnumerable<AppUser>> GetUsersAsync()
     {
-        return await _context.Users.ToListAsync();
-    }
-
-    /// <summary>
-    /// Apply changes to database
-    /// </summary>
-    /// <returns>bool: if storing is successful</returns>
-    public async Task<bool> SaveAllAsync()
-    {
-        return await _context.SaveChangesAsync() > 0;
+        return await _userManager.Users.ToListAsync();
     }
 
     // TODO Implement Update(AppUser user)
@@ -67,9 +60,10 @@ public class UserRepository : IUserRepository
     /// Apply changes to a user
     /// </summary>
     /// <param name="user"></param>
-    public void Update(AppUser user)
+    public async Task<bool> Update(AppUser user)
     {
-        throw new NotImplementedException();
+        var result = await _userManager.UpdateAsync(user);
+        return result.Succeeded;
     }
 
     /// <summary>
@@ -83,7 +77,7 @@ public class UserRepository : IUserRepository
         var usernameUC = username.ToUpper();
         var emailAddressUC = emailAddress.ToUpper();
         //TODO this query could be optimized - take max 2 items with less data then stop
-        var existingUsers = await _context
+        var existingUsers = await _userManager
             .Users.Where(user =>
                 user.NormalizedUserName!.Equals(usernameUC)
                 || user.NormalizedEmail!.Equals(emailAddressUC)

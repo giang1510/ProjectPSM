@@ -8,7 +8,7 @@ namespace API.DTOs;
 public class RegisterDto
 {
     [StringLength(64, MinimumLength = 4)]
-    public required string Username { get; set; }
+    public required string UserName { get; set; }
 
     [StringLength(128, MinimumLength = 8)]
     public required string Password { get; set; }

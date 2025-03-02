@@ -4,6 +4,8 @@ using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
+using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -14,19 +16,22 @@ namespace API.Controllers;
 /// </summary>
 public class AccountController : BaseApiController
 {
-    private readonly DataContext _context;
+    private readonly UserManager<AppUser> _userManager;
     private readonly IUserRepository _userRepository;
     private readonly ITokenService _tokenService;
+    private readonly IMapper _mapper;
 
     public AccountController(
-        DataContext context,
+        UserManager<AppUser> userManager,
         IUserRepository userRepository,
-        ITokenService tokenService
+        ITokenService tokenService,
+        IMapper mapper
     )
     {
-        _context = context;
+        _userManager = userManager;
         _userRepository = userRepository;
         _tokenService = tokenService;
+        _mapper = mapper;
     }
 
     /// <summary>
@@ -39,7 +44,7 @@ public class AccountController : BaseApiController
     {
         // TODO better way to handle bad request
         var userExistsState = await _userRepository.UserExists(
-            registerDto.Username,
+            registerDto.UserName,
             registerDto.EmailAddress
         );
         if (userExistsState == UserExistsState.UsernameExists)
@@ -48,14 +53,13 @@ public class AccountController : BaseApiController
             return BadRequest("Email address is taken.");
 
         // TODO Use UserManager (better mapping)
-        using var hmac = new HMACSHA512();
-        var user = new AppUser
-        {
-            EmailAddress = registerDto.EmailAddress,
-            DateOfBirth = registerDto.DateOfBirth
-        };
-        _context.Users.Add(user);
-        await _context.SaveChangesAsync();
+        var user = _mapper.Map<AppUser>(registerDto);
+        user.UserName = registerDto.UserName.ToLower();
+
+        var result = await _userManager.CreateAsync(user, registerDto.Password);
+
+        if (!result.Succeeded)
+            return BadRequest(result.Errors);
         return CreateUserDto(user);
     }
 

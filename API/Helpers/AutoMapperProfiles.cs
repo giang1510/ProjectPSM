@@ -12,6 +12,7 @@ public class AutoMapperProfiles : Profile
     public AutoMapperProfiles()
     {
         CreateMap<AppUser, MemberDto>();
+        CreateMap<AppUser, RegisterDto>();
         CreateMap<Product, ProductCardDto>();
         CreateMap<ProductPhoto, PhotoDto>();
         CreateMap<Review, ReviewDto>();
