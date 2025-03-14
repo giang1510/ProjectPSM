@@ -23,11 +23,6 @@ public class UserRepository : IUserRepository
         _mapper = mapper;
     }
 
-    /// <summary>
-    /// Get a user using username
-    /// </summary>
-    /// <param name="username"></param>
-    /// <returns>Complete user data</returns>
     public async Task<AppUser?> GetUserByUsernameAsync(string username)
     {
         return await _userManager.Users.FirstOrDefaultAsync(x =>
@@ -35,10 +30,6 @@ public class UserRepository : IUserRepository
         );
     }
 
-    /// <summary>
-    /// Get all members / registered users
-    /// </summary>
-    /// <returns>List of members</returns>
     public async Task<IEnumerable<MemberDto>> GetMembersAsync()
     {
         return await _userManager
@@ -46,32 +37,18 @@ public class UserRepository : IUserRepository
             .ToListAsync();
     }
 
-    /// <summary>
-    /// Get all users
-    /// </summary>
-    /// <returns>List of complete users</returns>
     public async Task<IEnumerable<AppUser>> GetUsersAsync()
     {
         return await _userManager.Users.ToListAsync();
     }
 
     // TODO Implement Update(AppUser user)
-    /// <summary>
-    /// Apply changes to a user
-    /// </summary>
-    /// <param name="user"></param>
     public async Task<bool> Update(AppUser user)
     {
         var result = await _userManager.UpdateAsync(user);
         return result.Succeeded;
     }
 
-    /// <summary>
-    /// Check if a user with specific username or mail address exists
-    /// </summary>
-    /// <param name="username"></param>
-    /// <param name="emailAddress"></param>
-    /// <returns>UserExistsState</returns>
     public async Task<UserExistsState> UserExists(string username, string emailAddress)
     {
         var usernameUC = username.ToUpper();
@@ -93,5 +70,10 @@ public class UserRepository : IUserRepository
         }
 
         return UserExistsState.No;
+    }
+
+    public async Task<IdentityResult> CreateUserAsync(AppUser user, string password)
+    {
+        return await _userManager.CreateAsync(user, password);
     }
 }

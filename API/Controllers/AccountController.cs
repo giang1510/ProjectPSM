@@ -56,8 +56,7 @@ public class AccountController : BaseApiController
         var user = _mapper.Map<AppUser>(registerDto);
         user.UserName = registerDto.UserName.ToLower();
 
-        // TODO use unitOfWork.UserRepository instead
-        var result = await _userManager.CreateAsync(user, registerDto.Password);
+        var result = await _unitOfWork.UserRepository.CreateUserAsync(user, registerDto.Password);
 
         if (!result.Succeeded)
             return BadRequest(result.Errors);
