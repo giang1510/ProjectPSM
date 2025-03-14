@@ -20,6 +20,11 @@ public class ProductRepository : IProductRepository
         _mapper = mapper;
     }
 
+    public void AddProduct(Product product)
+    {
+        _context.Products.Add(product);
+    }
+
     // TODO implement this
     public Task<Product?> GetProductAsync(string productName)
     {

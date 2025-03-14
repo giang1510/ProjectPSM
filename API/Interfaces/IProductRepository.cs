@@ -9,6 +9,13 @@ namespace API;
 public interface IProductRepository
 {
     /// <summary>
+    /// Add a new product
+    /// </summary>
+    /// <param name="product"></param>
+    /// <returns></returns>
+    void AddProduct(Product product);
+
+    /// <summary>
     /// Apply changes to a product
     /// </summary>
     /// <param name="product"></param>

@@ -35,6 +35,7 @@ public class ProductsController : BaseApiController
         return Ok(products);
     }
 
+    // TODO Use something else more robust instead of id
     /// <summary>
     /// Handle getting a product page
     /// </summary>
@@ -91,5 +92,21 @@ public class ProductsController : BaseApiController
             return BadRequest("Failed to add new review");
 
         return _mapper.Map<ReviewDto>(review);
+    }
+
+    [HttpPost("add")]
+    public async Task<ActionResult<ProductDetailDto>> AddProduct(ProductEntryDto productEntryDto)
+    {
+        var product = _mapper.Map<Product>(productEntryDto);
+        _unitOfWork.ProductRepository.AddProduct(product);
+
+        if (!await _unitOfWork.Complete())
+            return BadRequest("Failed to add product");
+
+        var productDetail = await _unitOfWork.ProductRepository.GetProductDetailAsync(product.Id);
+        if (productDetail == null)
+            return BadRequest("Failed to get product details");
+
+        return Ok(productDetail);
     }
 }
