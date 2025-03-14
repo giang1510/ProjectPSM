@@ -15,11 +15,11 @@ namespace API.Controllers;
 [Authorize]
 public class UsersController : BaseApiController
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public UsersController(IUserRepository userRepository)
+    public UsersController(IUnitOfWork unitOfWork)
     {
-        _userRepository = userRepository;
+        _unitOfWork = unitOfWork;
     }
 
     /// <summary>
@@ -29,7 +29,7 @@ public class UsersController : BaseApiController
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AppUser>>> GetMembers()
     {
-        var users = await _userRepository.GetMembersAsync();
+        var users = await _unitOfWork.UserRepository.GetMembersAsync();
 
         return Ok(users);
     }
@@ -42,7 +42,7 @@ public class UsersController : BaseApiController
     [HttpGet("{username}")]
     public async Task<ActionResult<AppUser>> GetUser(string username)
     {
-        var user = await _userRepository.GetUserByUsernameAsync(username);
+        var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
         // TODO better way to handle user not found
         if (user == null)
         {

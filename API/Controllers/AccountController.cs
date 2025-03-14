@@ -17,19 +17,19 @@ namespace API.Controllers;
 public class AccountController : BaseApiController
 {
     private readonly UserManager<AppUser> _userManager;
-    private readonly IUserRepository _userRepository;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly ITokenService _tokenService;
     private readonly IMapper _mapper;
 
     public AccountController(
         UserManager<AppUser> userManager,
-        IUserRepository userRepository,
+        IUnitOfWork unitOfWork,
         ITokenService tokenService,
         IMapper mapper
     )
     {
         _userManager = userManager;
-        _userRepository = userRepository;
+        _unitOfWork = unitOfWork;
         _tokenService = tokenService;
         _mapper = mapper;
     }
@@ -43,7 +43,7 @@ public class AccountController : BaseApiController
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
         // TODO better way to handle bad request
-        var userExistsState = await _userRepository.UserExists(
+        var userExistsState = await _unitOfWork.UserRepository.UserExists(
             registerDto.UserName,
             registerDto.EmailAddress
         );
@@ -56,6 +56,7 @@ public class AccountController : BaseApiController
         var user = _mapper.Map<AppUser>(registerDto);
         user.UserName = registerDto.UserName.ToLower();
 
+        // TODO use unitOfWork.UserRepository instead
         var result = await _userManager.CreateAsync(user, registerDto.Password);
 
         if (!result.Succeeded)
@@ -71,7 +72,7 @@ public class AccountController : BaseApiController
     [HttpPost("login")] // api/account/login
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
-        var user = await _userRepository.GetUserByUsernameAsync(loginDto.Username);
+        var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(loginDto.Username);
 
         // TODO better way to handle Unauthorized
         if (user == null)
