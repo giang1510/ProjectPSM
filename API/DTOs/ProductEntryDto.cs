@@ -1,5 +1,3 @@
-using System;
-
 namespace API.DTOs;
 
 public class ProductEntryDto
@@ -9,4 +7,5 @@ public class ProductEntryDto
     public decimal Price { get; set; }
     public string? Category { get; set; }
     public string? Manufacturer { get; set; }
+    public List<PhotoDto>? Photos { get; set; }
 }

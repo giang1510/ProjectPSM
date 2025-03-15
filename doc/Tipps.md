@@ -42,6 +42,8 @@
   - dotnet ef migrations add fileName -o Data/Migrations
 - Update database to new schemas
   - dotnet ef database update
+- Delete db
+  - dotnet ef database drop
 
 # Notes for developer
 

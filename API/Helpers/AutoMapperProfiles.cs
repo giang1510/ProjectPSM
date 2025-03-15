@@ -25,6 +25,7 @@ public class AutoMapperProfiles : Profile
                     opt.MapFrom(src =>
                         string.IsNullOrEmpty(src.Category) ? "Other" : src.Category.ToUpper()
                     )
-            );
+            )
+            .ForMember(dest => dest.Photos, opt => opt.Ignore());
     }
 }

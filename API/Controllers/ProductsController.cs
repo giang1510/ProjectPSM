@@ -98,6 +98,11 @@ public class ProductsController : BaseApiController
     public async Task<ActionResult<ProductDetailDto>> AddProduct(ProductEntryDto productEntryDto)
     {
         var product = _mapper.Map<Product>(productEntryDto);
+        if (productEntryDto.Photos != null)
+            product.Photos = productEntryDto
+                .Photos.Select(photo => new ProductPhoto { Url = photo.Url, Product = product })
+                .ToList();
+
         _unitOfWork.ProductRepository.AddProduct(product);
 
         if (!await _unitOfWork.Complete())
