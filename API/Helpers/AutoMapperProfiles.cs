@@ -17,6 +17,8 @@ public class AutoMapperProfiles : Profile
         CreateMap<ProductPhoto, PhotoDto>();
         CreateMap<Review, ReviewDto>();
         CreateMap<Product, ProductDetailDto>();
+        CreateMap<ProductUpdateDto, Product>()
+            .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
         // TODO Use constant from a file instead of plain values
         CreateMap<ProductEntryDto, Product>()
             .ForMember(

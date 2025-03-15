@@ -19,7 +19,7 @@ public interface IProductRepository
     /// Apply changes to a product
     /// </summary>
     /// <param name="product"></param>
-    void Update(Product product);
+    Product Update(ProductUpdateDto productUpdateDto, Product product);
 
     /// <summary>
     /// Get all products

@@ -94,6 +94,11 @@ public class ProductsController : BaseApiController
         return _mapper.Map<ReviewDto>(review);
     }
 
+    /// <summary>
+    /// Handle creating a new product
+    /// </summary>
+    /// <param name="productEntryDto"></param>
+    /// <returns></returns>
     [HttpPost("add")]
     public async Task<ActionResult<ProductDetailDto>> AddProduct(ProductEntryDto productEntryDto)
     {
@@ -113,5 +118,25 @@ public class ProductsController : BaseApiController
             return BadRequest("Failed to get product details");
 
         return Ok(productDetail);
+    }
+
+    /// <summary>
+    /// Handle updating a product
+    /// </summary>
+    /// <param name="productUpdateDto"></param>
+    /// <returns></returns>
+    [HttpPut("update")]
+    public async Task<ActionResult> UpdateProduct(ProductUpdateDto productUpdateDto)
+    {
+        var product = await _unitOfWork.ProductRepository.GetProductByIdAsync(productUpdateDto.Id);
+        if (product == null)
+            return NotFound("Product not found!");
+
+        _unitOfWork.ProductRepository.Update(productUpdateDto, product);
+
+        if (!await _unitOfWork.Complete())
+            return BadRequest("Failed to update product");
+
+        return Ok();
     }
 }

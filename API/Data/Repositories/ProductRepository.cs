@@ -66,8 +66,8 @@ public class ProductRepository : IProductRepository
     }
 
     // TODO implement this
-    public void Update(Product product)
+    public Product Update(ProductUpdateDto productUpdateDto, Product product)
     {
-        throw new NotImplementedException();
+        return _mapper.Map(productUpdateDto, product);
     }
 }
