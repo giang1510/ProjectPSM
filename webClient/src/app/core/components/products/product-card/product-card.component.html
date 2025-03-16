@@ -36,7 +36,7 @@
       >
     </h3>
     <div class="price">
-      {{ productCard.price < 0 ? "No price" : productCard.price }}
+      {{ productCard.price ? productCard.price : "No price" }}
     </div>
   </div>
 </div>

@@ -4,7 +4,7 @@ import { Review } from "./review";
 export interface ProductCard{
     id: number;
     name: string;
-    price: number;
+    price: number | null;
     category: string;
     isActive: boolean;
     manufacturer: string;
