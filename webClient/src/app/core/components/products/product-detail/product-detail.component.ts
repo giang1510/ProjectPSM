@@ -5,6 +5,7 @@ import { ProductDetail } from 'src/app/core/models/productDetail';
 import { ProductRatingComponent } from '../product-rating/product-rating.component';
 import { ProductRating } from 'src/app/core/models/productRating';
 import { AccountService } from 'src/app/core/services/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-detail',
@@ -20,13 +21,22 @@ export class ProductDetailComponent implements OnInit{
   productRating: ProductRating | undefined;
   photoStr: string = '';
 
-  constructor(private productService: ProductService, private accountService: AccountService){}
+  constructor(
+    private productService: ProductService,
+    private accountService: AccountService,
+    private router: Router
+  ){}
 
   ngOnInit(): void {
     this.getProductDetail();
   }
 
   getProductDetail() {
+    // Get product detail from state if available
+    const navigation = this.router.getCurrentNavigation();
+    this.productDetail = navigation?.extras.state?.['productDetail'];
+    if(this.productDetail) return;
+
     this.productService.getProductDetail(this.productId).subscribe({
       next: prodDetail => {
         if(prodDetail){
