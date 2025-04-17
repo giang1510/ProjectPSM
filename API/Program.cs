@@ -30,6 +30,7 @@ app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.MapControllers();
+app.MapFallbackToController("Index", "Fallback");
 
 await app.MigrateSeedData();
 
