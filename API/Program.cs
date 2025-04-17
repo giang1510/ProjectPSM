@@ -26,6 +26,9 @@ app.UseCors(builder =>
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.MapControllers();
 
 await app.MigrateSeedData();
