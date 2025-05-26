@@ -27,7 +27,7 @@ public static class ApplicationServiceExtension
     {
         services.AddDbContext<DataContext>(opt =>
         {
-            opt.UseSqlite(config.GetConnectionString(ConfigurationKeys.DBDefaultConnection));
+            opt.UseSqlServer(config.GetConnectionString(ConfigurationKeys.DBDefaultConnection));
         });
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<ITokenService, TokenService>();

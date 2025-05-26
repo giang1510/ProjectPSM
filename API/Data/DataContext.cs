@@ -40,5 +40,7 @@ public class DataContext(DbContextOptions options)
             .WithOne(r => r.Role)
             .HasForeignKey(ur => ur.RoleId)
             .IsRequired();
+
+        builder.Entity<Product>().Property(p => p.Price).HasColumnType("decimal(18,2)");
     }
 }

@@ -5,6 +5,7 @@ using API.Data;
 using API.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace API;
 
@@ -96,10 +97,18 @@ public static class Seed
             return;
         for (int i = 0; i < products.Count; i++)
         {
-            products[i].Photos.Add(new ProductPhoto { Url = photos[i].Url, Product = products[i] });
+            products[i].Photos.Add(new ProductPhoto { Url = photos[i].Url });
             context.Products.Add(products[i]);
         }
+        // await context.SaveChangesAsync();
+
+        // var productList = await context.Products.ToListAsync();
+        // for (int i = 0; i < productList.Count; i++)
+        // {
+        //     productList[i].Photos.Add(new ProductPhoto { Url = photos[i].Url });
+        // }
 
         await context.SaveChangesAsync();
+        Console.WriteLine("Products seeded successfully.");
     }
 }

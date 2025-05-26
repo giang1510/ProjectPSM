@@ -7,8 +7,4 @@ namespace API.Entities;
 /// </summary>
 ///
 [Table("ProductPhotos")]
-public class ProductPhoto : Photo
-{
-    public int ProductId { get; set; }
-    public required Product Product { get; set; }
-}
+public class ProductPhoto : Photo { }

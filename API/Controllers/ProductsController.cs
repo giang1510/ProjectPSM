@@ -105,7 +105,7 @@ public class ProductsController : BaseApiController
         var product = _mapper.Map<Product>(productEntryDto);
         if (productEntryDto.Photos != null)
             product.Photos = productEntryDto
-                .Photos.Select(photo => new ProductPhoto { Url = photo.Url, Product = product })
+                .Photos.Select(photo => new ProductPhoto { Url = photo.Url })
                 .ToList();
 
         _unitOfWork.ProductRepository.AddProduct(product);

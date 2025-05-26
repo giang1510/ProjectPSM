@@ -1,34 +1,29 @@
 [
     {
-        "Id": 1,
         "Name": "Asus GeForce RTX 4060 Dual OC",
         "Category": "Computer",
         "IsActive": true,
         "Manufacturer": "Asus"
     },
     {
-        "Id": 2,
         "Name": "Dior Sauvage Eau de Toilette",
         "Category": "Beauty",
         "IsActive": true,
         "Manufacturer": "Dior"
     },
     {
-        "Id": 3,
         "Name": "Nike Air Force 1 '07",
         "Category": "Fashion",
         "IsActive": true,
         "Manufacturer": "Nike"
     },
     {
-        "Id": 4,
         "Name": "Orion Choco Pie",
         "Category": "Food",
         "IsActive": true,
         "Manufacturer": "Orion"
     },
     {
-        "Id": 5,
         "Name": "MALM - Bettgestell hoch mit 2 Schubkästen",
         "Category": "Furniture",
         "IsActive": true,

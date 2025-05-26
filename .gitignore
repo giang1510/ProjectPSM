@@ -483,3 +483,4 @@ $RECYCLE.BIN/
 # Custom
 API/appsettings.Development.json
 API/appsettings.json
+*.env

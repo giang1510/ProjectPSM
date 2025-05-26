@@ -15,7 +15,7 @@
     - nvm install 18.10.0
     - nvm use 18.10.0
 
-## Common errprs
+## Common errors
 
 - ɵunwrapWritableSignal
   - Downgrade VSCode-Extension Angular Languague Service to 17.2.1
@@ -44,6 +44,10 @@
   - dotnet ef database update
 - Delete db
   - dotnet ef database drop
+- Before Changing sql database type (Posgre, SQLServer, SQLite)
+  - First: Drop db
+  - Second: Change appsettings
+  - Third: Delete all migration files (in Data/Migrations)
 
 # Notes for developer
 
@@ -57,3 +61,10 @@
 ## Mac
 
 - "chmod 755 filePath" to make file executable
+
+# Deployment
+
+## Docker
+
+- run docker locally
+  - docker compose --env-file ./config/psm.env up -d
