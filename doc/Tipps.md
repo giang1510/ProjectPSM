@@ -64,6 +64,11 @@
 
 # Deployment
 
+## API
+
+- publish to folder
+  - dotnet publish -c Release -o ./bin/Publish
+
 ## Docker
 
 - run docker locally
