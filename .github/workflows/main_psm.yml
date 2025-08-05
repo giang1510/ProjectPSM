@@ -24,9 +24,7 @@ jobs:
           node-version: "22"
 
       - name: Install Angular CLI
-        run: |
-          npm install -g @angular/cli@18
-          npm install
+        run: npm install -g @angular/cli@18
 
       - name: Install dependencies and build Angular app
         run: |
