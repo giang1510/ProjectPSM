@@ -29,6 +29,7 @@ jobs:
       - name: Install dependencies and build Angular app
         run: |
           cd webClient
+          rm -rf node_modules
           npm install
           ng build
 
