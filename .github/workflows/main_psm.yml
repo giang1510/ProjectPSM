@@ -29,8 +29,7 @@ jobs:
       - name: Install dependencies and build Angular app
         run: |
           cd webClient
-          npm install @angular-devkit/build-angular@18.2.20
-          npm install
+          npm install --production=false
           ng build
 
       - name: Set up .NET Core
