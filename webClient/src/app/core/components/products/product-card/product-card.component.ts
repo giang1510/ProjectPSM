@@ -55,6 +55,6 @@ export class ProductCardComponent implements OnInit{
 
   initUrls(){
     if(!this.productCard) return;
-    this.urls.productDetail = APP_ROUTES.PRODUCT_DETAIL + this.productCard.id;
+    this.urls.productDetail = APP_ROUTES.PRODUCT_DETAIL + '/' + this.productCard.id;
   }
 }

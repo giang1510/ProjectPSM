@@ -4,19 +4,25 @@ import { HomeComponent } from './core/components/home/home.component';
 import { LoginComponent } from './core/components/account/login/login.component';
 import { RegisterComponent } from './core/components/account/register/register.component';
 import { ProductDetailComponent } from './core/components/products/product-detail/product-detail.component';
+import { ProductAddComponent } from './core/components/products/product-add/product-add.component';
 
 // Path constants
 export const APP_ROUTES = {
   LOGIN: 'login',
   REGISTER: 'register',
-  PRODUCT_DETAIL: 'products/'
+  PRODUCT_DETAIL: 'products'
 };
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: APP_ROUTES.LOGIN, component: LoginComponent},
   {path: APP_ROUTES.REGISTER, component: RegisterComponent},
-  {path: APP_ROUTES.PRODUCT_DETAIL + ':productId', component: ProductDetailComponent},
+  {
+    path: APP_ROUTES.PRODUCT_DETAIL , 
+    children: [
+      {path: 'add', component: ProductAddComponent},
+      {path: ':productId', component: ProductDetailComponent},
+    ]},
 ];
 
 @NgModule({

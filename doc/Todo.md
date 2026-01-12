@@ -9,6 +9,7 @@
 
 - Implement simple web scraping
 - Implement unit of work pattern
+- Restructure project folders: https://github.com/kawser2133/clean-structured-project
 
 ## Web Client
 

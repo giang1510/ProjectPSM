@@ -19,7 +19,7 @@
 <h3 align="center">Project PSM</h3>
 
   <p align="center">
-    Social media service of products
+    A social platform for discovering and rating detailed product insights
     <br />
     <a href="https://github.com/giang1510/ProjectPSM"><strong>Explore the docs »</strong></a>
     <br />
@@ -63,7 +63,7 @@
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-Social media service of products
+This platform is an integrated social product discovery and review hub. It serves as a centralized intelligence platform where users can conduct comprehensive pre-purchase research and share experiential feedback.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -106,7 +106,31 @@ Install or update these software to the latest version
 
 ## Usage
 
-...
+This platform is designed to be a one-stop intelligence hub for product research. Here is how you can get the most out of it:
+
+### Discovering Products
+
+Search for any product to view its Unified Intelligence Profile:
+
+1. Cross-Platform Ratings: Instantly see aggregated scores from top e-commerce and specialized review sites.
+2. Review Feed: Browse a curated stream of text-based professional reviews and community-driven video testimonials (e.g., YouTube deep-dives and social media reels).
+
+### Evaluating with Precision
+
+Go beyond a single star rating. Use the Granular Scoring System to see how a product performs in specific categories:
+
+1. Overall Satisfaction: The community's general consensus.
+2. Attribute Scores: Dive into specific ratings for Value, Durability, Design, and Ease of Use.
+
+### Contributing Your Experience
+
+Share your own authentic feedback to help the community:
+
+1. Multi-Category Rating: Submit your own ratings across the same granular categories to influence the global score.
+2. Share Insights: Post text reviews or link your video demonstrations directly to the product profile.
+
+<!-- ### Real-Time Sentiment
+Check the Sentiment Trend graph on any product page to see if quality or user satisfaction is improving or declining based on recent social data.  -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
