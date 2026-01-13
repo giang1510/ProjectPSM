@@ -73,3 +73,13 @@
 
 - run docker locally
   - docker compose --env-file ./config/psm.env up -d
+
+# Testing
+
+## API
+
+- dotnet watch -no-hot-reload
+
+## webClient
+
+- ng serve

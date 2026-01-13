@@ -73,6 +73,7 @@ This platform is an integrated social product discovery and review hub. It serve
 - [![SQLite][SQLite-shield]][SQLite-url]
 - [![Angular][Angular.io]][Angular-url]
 - [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+- [![Docker][Docker-shield]][Docker-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -204,3 +205,5 @@ Project Link: [https://github.com/giang1510/ProjectPSM](https://github.com/giang
 [dotnet-url]: https://dotnet.microsoft.com/en-us/apps/aspnet
 [SQLite-shield]: https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white
 [SQLite-url]: https://www.sqlite.org
+[Docker-shield]: https://img.shields.io/badge/docker-257bd6?style=for-the-badge&logo=docker&logoColor=white
+[Docker-url]: https://www.docker.com/
